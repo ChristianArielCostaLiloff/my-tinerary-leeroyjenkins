@@ -1,4 +1,4 @@
-let hotel = [
+export const hotel = [
     {
       id: "ho1",
       name: "Hotel Las Américas Torre del Mar",
