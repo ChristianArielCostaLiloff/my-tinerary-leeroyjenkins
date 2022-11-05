@@ -6,8 +6,6 @@ import CallToAction from "./CallToAction";
 export default function Home1() {
   return (
     <div className="home1">
-      <AutoToTop />
-      <NavBar />
       <div className="presentation-container">
         <div className="presentation">
           <figure className="presentation__image">

@@ -8,8 +8,6 @@ export default function Home2() {
         <>
             <div className="container_home2">
                 <Carousel />
-                <Footer />
-                <ScrollToTop />
             </div>
         </>
     )
