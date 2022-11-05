@@ -589,6 +589,20 @@ nav {
   color: white;
   text-shadow: black 2px 2px 10px;
 }
+
+/* --- SIGN IN --- */
+
+.body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-image: url(../public/img/signin-background.jpg);
+  background-size: cover;
+  background-position-y: 50%;
+}
+
 /* --- Sing Up --- */
 .page--sing-up{
   padding: 20px;
@@ -600,7 +614,9 @@ nav {
   background-image: url("../public/img/background-SignUp.jpg");
   background-size: cover;
 }
-/* Form */
+
+/* --- FORM --- */
+
 .container{
   max-width: 700px;
   width: 100%;
