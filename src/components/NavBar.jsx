@@ -49,12 +49,12 @@ export default function NavBar() {
           </li>
         </ul>
       </div>
-      <div class="hamburger-menu">
+      <div className="hamburger-menu">
         <input id="menu__toggle" type="checkbox" />
-        <label class="menu__btn" for="menu__toggle">
+        <label className="menu__btn" htmlFor="menu__toggle">
           <span></span>
         </label>
-        <ul class="menu__box">
+        <ul className="menu__box">
           <li>
             <CallToAction path="/" style="menu__item">
               Home
