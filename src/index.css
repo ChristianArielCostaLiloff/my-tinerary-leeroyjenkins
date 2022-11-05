@@ -22,12 +22,12 @@
 .home1 {
   background-image: url("../public/img/background-Home1.jpg");
   background-size: cover;
-  height: 100vh;
+  height: 95vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 720px;
+  min-height: 670px;
 }
 .presentation-container {
   width: 100%;
@@ -82,7 +82,7 @@
   text-align: center;
   text-shadow: 15px 15px 30px black;
 }
- .presentation__btn-container {
+.presentation__btn-container {
   height: 200px;
   display: flex;
   align-items: center;
@@ -96,42 +96,42 @@
     rgb(0, 113, 158),
     rgba(0, 255, 64, 0.336)
   );
- position: relative;
- cursor: pointer;
- color: #fff;
- font-size: 25px;
- padding: 16px;
- text-decoration: none;
- text-transform: uppercase;
+  position: relative;
+  cursor: pointer;
+  color: #fff;
+  font-size: 25px;
+  padding: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .presentation__btn:after {
- content: "";
- display: block;
- position: absolute;
- left: 0;
- top: 0;
- height: 100%;
- width: 100%;
- outline: 2px solid #fff;
- opacity: .2;
- transition: all .3s;
- animation: pulse 2s infinite alternate;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  outline: 2px solid #fff;
+  opacity: 0.2;
+  transition: all 0.3s;
+  animation: pulse 2s infinite alternate;
 }
 @keyframes pulse {
- 0%{transform:scale(1);
- opacity: .4;
- border-radius: 40px;}
- 
- 100%{transform:scale(1.05, 1.2);
- opacity: .6;
-border-radius: 20px;}
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+    border-radius: 40px;
+  }
+
+  100% {
+    transform: scale(1.05, 1.2);
+    opacity: 0.6;
+    border-radius: 20px;
+  }
 }
 @media only screen and (max-width: 800px) {
-  .presentation {
-    flex-direction: column;
-    height: 100vh;
-  }
   .presentation__info {
     width: 90%;
   }
@@ -139,8 +139,8 @@ border-radius: 20px;}
     height: 50%;
   }
 }
-@media only screen and (max-width:550px) {
-  .presentation__btn{
+@media only screen and (max-width: 550px) {
+  .presentation__btn {
     padding: 10px;
     font-size: 20px;
   }
@@ -149,17 +149,19 @@ border-radius: 20px;}
   .presentation__text h2 {
     font-size: 50px;
   }
-  .presentation__btn{
+  .presentation__btn {
     font-size: 16px;
   }
-} 
+}
 /* --- NavBar --- */
 nav {
   width: 100%;
-  height: 80px;
+  min-height: 50px;
+  height: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #003356;
 }
 .nav {
   display: flex;
@@ -312,10 +314,10 @@ nav {
 
 /* --- CONTAINER HOME 2 --- */
 
-.container_home2{
+.container_home2 {
   width: 100%;
-  height: 100vh;
-  min-height: 720px;
+  height: 90vh;
+  min-height: 630px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -324,31 +326,19 @@ nav {
 
 /* --- CAROUSEL --- */
 
-.container_carouselandarrows{
+.container_carouselandarrows {
   background-image: url("/public/img/home2.jpg");
+  background-size: cover;
   display: flex;
   gap: 5%;
   justify-content: center;
   align-items: center;
   flex: 9;
   width: 100%;
+  min-height: fit-content;
 }
 
-.btn_carousel_back{
-  width: fit-content;
-  height: 50px;
-  display: flex;
-  color: white;
-  font-size: 30px;
-  font-weight: 600;
-  text-shadow: black 2px 2px 20px;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-
-}
-
-.btn_carousel_forward{
+.btn_carousel_back {
   width: fit-content;
   height: 50px;
   display: flex;
@@ -361,9 +351,21 @@ nav {
   border: none;
 }
 
-.container_title__carousel{
-  padding-bottom: 100px;
+.btn_carousel_forward {
+  width: fit-content;
   height: 50px;
+  display: flex;
+  color: white;
+  font-size: 30px;
+  font-weight: 600;
+  text-shadow: black 2px 2px 20px;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+
+.container_title__carousel {
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -372,9 +374,9 @@ nav {
   font-size: xx-large;
 }
 
-.container_card{
+.container_card {
   width: 700px;
-  height: 400px;
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -382,13 +384,13 @@ nav {
   gap: 4px;
 }
 
-.container_img{
+.container_img {
   width: 300px;
   height: 150px;
   overflow: hidden;
 }
 
-.card{
+.card {
   display: flex;
   flex-direction: column;
   width: 300px;
@@ -396,7 +398,7 @@ nav {
   gap: 10px;
 }
 
-.card_img{
+.card_img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -405,7 +407,7 @@ nav {
   min-height: 150px;
 }
 
-.card_name{
+.card_name {
   color: white;
   text-shadow: black 2px 2px 10px;
   font-size: 18px;
@@ -413,12 +415,11 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 
 /* --- BUTTON TO TOP --- */
 
-.btn_totop{
+.btn_totop {
   background: white;
   position: fixed;
   bottom: 25px;
@@ -430,14 +431,16 @@ nav {
   align-items: center;
   justify-content: center;
   padding: 10px;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 
 /* --- FOOTER --- */
 
-.footer_home2{
+.footer_home2 {
+  padding: 5px 0px;
   width: 100%;
-  min-height: 100px;
+  min-height: 90px;
+  height: 10vh;
   background-color: #212f45;
   display: flex;
   flex: 1;
@@ -445,13 +448,13 @@ nav {
   align-items: center;
 }
 
-.container_iconsmedia{
+.container_iconsmedia {
   display: flex;
   width: 110px;
   gap: 10px;
 }
 
-.container_links{
+.container_links {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -459,15 +462,14 @@ nav {
   gap: 100px;
 }
 
-.container_links a{
-
+.container_links a {
   text-decoration: none;
   color: white;
   text-shadow: black 2px 2px 10px;
   font-size: 20px;
 }
 
-.container_team{
+.container_team {
   width: 150px;
   display: flex;
   flex-direction: column;
@@ -476,53 +478,54 @@ nav {
   gap: 10px;
 }
 
-.container_teamname{
+.container_teamname {
   font-size: 20px;
   color: white;
   text-shadow: black 2px 2px 10px;
 }
 
-.img_git_footer{
+.img_git_footer {
   width: 30px;
 }
 
-@media only screen and (max-width:1100px) {
-  .btn_carousel_back{
+@media only screen and (max-width: 1100px) {
+  .btn_carousel_back {
     font-size: 15px;
   }
-  .btn_carousel_forward{
+  .btn_carousel_forward {
     font-size: 15px;
   }
+}
+
+@media only screen and (max-width: 930px) {
+  .container_home2 {
+    min-height: 1000px;
+  }
+  .btn_carousel_back {
+    display: none;
+  }
+  .btn_carousel_forward {
+    display: none;
+  }
+}
+@media only screen and (max-width: 930px) {
+  .container_card {
+    width: 400px;
+    height: fit-content;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .container_iconsmedia {
+    flex-direction: column;
+    width: 20px;
+    gap: 10px;
+    height: fit-content;
   }
 
-  @media only screen and (max-width:930px) {
-    .btn_carousel_back{
-      display: none;
-    }
-    .btn_carousel_forward{
-      display: none;
-    }
-    }
-  
-    @media only screen and (max-width:930px) {
-      .container_card{
-        width: 400px;
-        height: fit-content;
-    }
+  .container_links {
+    flex-direction: column;
+    font-size: 30px;
+    gap: 10px;
   }
-
-  @media only screen and (max-width:600px) {
-    .container_iconsmedia{
-      flex-direction: column;
-      width: 20px;
-      gap: 10px;
-      height: fit-content;
-    }
-
-    .container_links{
-      flex-direction: column;
-      font-size: 30px;
-      gap: 10px;
-      
-    }
-  }
+}
