@@ -786,6 +786,131 @@ form .button input:hover {
   /* Use the Roboto font that is loaded in the <head> */
   font-family: "Roboto", sans-serif;
 }
+
+/* --- HOTELS --- */
+
+.body_CH {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.card_CH {
+  width: 500px;
+  height: 250px;
+  display: flex;
+  overflow: hidden;
+  background: #ffff;
+  box-shadow: 0 5px 10px #006466;
+  border-radius: 10px;
+  transition: 0.1s;
+}
+
+.card_CH:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 20px #0b525b;
+}
+
+.card_CH .img_card_CH {
+  object-fit: cover;
+  width: 40%;
+  height: 100%;
+  background-size: cover;
+}
+
+.card_CH .content_card_CH {
+  width: 60%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 50px 150px 50px;
+  padding: 10px 15px;
+}
+
+.card_CH .content_card_CH .title_card_CH h3 {
+  color: #026e5e;
+}
+
+.card_CH .content_card_CH .title_card_CH span {
+  color: #0089ba;
+  font-size: 12px;
+}
+
+.card_CH .content_card_CH .text_CH p {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 15px;
+}
+
+.card_CH .content_card_CH .container_btn_CH button {
+  background: #006466;
+  padding: 5px 10px;
+  color: #ffff;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.card_CH .content_card_CH .container_btn_CH button:hover {
+  background: #4d194d;
+}
+
+/* --- SELECT BUTTON --- */
+
+.select_and_search {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0!important;
+  background: #006466;
+  background-image: none;
+  flex: 1;
+  padding: 0 .5em;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  line-height: 3;
+  background: #5c6664;
+  box-shadow: 2px 2px 10px black;
+  overflow: hidden;
+  border-radius: .25em;
+}
+
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #0b525b;
+  pointer-events: none;
+  transition: .25s all ease;
+}
+
+.select:hover:after {
+  color: #23b499;
+}
 /* --- Cities --- */
 .base-container {
   display: flex;
