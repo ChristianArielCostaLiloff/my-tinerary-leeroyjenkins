@@ -855,7 +855,10 @@ form .button input:hover {
   background: #4d194d;
 }
 
+
+
 /* --- SELECT BUTTON --- */
+
 
 .select_and_search {
   display: flex;
@@ -872,7 +875,7 @@ select {
   outline: 0;
   box-shadow: none;
   border: 0!important;
-  background: #006466;
+  background: #0089ba;
   background-image: none;
   flex: 1;
   padding: 0 .5em;
@@ -903,13 +906,13 @@ select::-ms-expand {
   top: 0;
   right: 0;
   padding: 0 1em;
-  background: #0b525b;
+  background: #003356;
   pointer-events: none;
   transition: .25s all ease;
 }
 
 .select:hover:after {
-  color: #23b499;
+  color: #0089ba;
 }
 /* --- Cities --- */
 .base-container {
@@ -925,12 +928,12 @@ select::-ms-expand {
   gap: 20px;
 }
 .cities-nav {
-  height: fit-content;
+  height: 100px;
   padding: 5px;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   gap: 10px;
 }
 @media only screen and (max-width:600px) {
