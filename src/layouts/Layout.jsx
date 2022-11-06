@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 
 export default function Layout(props) {
   return (
-    <div>
+    <div className="base-container">
       <AutoToTop />
       <ScrollToTop/>
       <NavBar />

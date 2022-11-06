@@ -5,6 +5,7 @@ import NotFound from "./components/NotFound";
 import SignIn from "./pages/SignIn";
 import Layout from "./layouts/Layout";
 import SingUp from "./pages/SignUp";
+import Cities from "./pages/Cities";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/signup" element={<SingUp />}></Route>
+          <Route path="/cities" element={<Cities />} />
+          <Route path="/signup" element={<SingUp />} />
           <Route path="/signin" element={<SignIn />} />
         </Routes>
       </Layout>
