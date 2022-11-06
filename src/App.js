@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import NotFound from "./components/NotFound";
 import Layout from "./layouts/Layout";
 import SingUp from "./pages/SignUp";
+import Cities from "./pages/Cities";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/signup" element={<SingUp />}></Route>
+          <Route path="/cities" element={<Cities/>}/>
+          <Route path="/signup" element={<SingUp />}/>
         </Routes>
       </Layout>
     </BrowserRouter>
