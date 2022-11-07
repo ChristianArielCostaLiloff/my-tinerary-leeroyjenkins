@@ -7,7 +7,7 @@ import Layout from "./layouts/Layout";
 import SingUp from "./pages/SignUp";
 import Cities from "./pages/Cities";
 import Hotels from "./pages/Hotels";
-import DetailsCard from "./components/DetailsCard";
+import DetailsCard from "./pages/DetailsCard";
 
 function App() {
   return (

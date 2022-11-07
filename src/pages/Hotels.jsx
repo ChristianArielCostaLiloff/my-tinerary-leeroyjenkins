@@ -9,10 +9,6 @@ export default function Hotels() {
     let [hotel, setHotel] = useState(hotelsData);
 
     useEffect(() => {
-        setHotel(hotel.map(e => {
-            e.photo = e.photo[0]
-            return e
-        }))
         let mainNavBar = document.getElementById("hotels-nav");
         mainNavBar.addEventListener("input", showSortedCard);
     }, []);
@@ -31,10 +27,6 @@ export default function Hotels() {
         console.log("Filtered by: SortedPer: " + selectSort + " Text: " + searchText);
         localStorage.setItem("filterHotel", JSON.stringify({ text: searchText, sortPer: selectSort }))
     };
-
-
-
-
     return (
         <>
             <div className="base-cities">
@@ -52,7 +44,6 @@ export default function Hotels() {
                     {hotel.length > 0 ? (
 
                         hotel.map((hotel) => {
-                            /* hotel.photo = hotel.photo[0] */
                             return (
                                 <Card city={hotel} key={hotel.id}>
                                     Capacity: {hotel.capacity}
