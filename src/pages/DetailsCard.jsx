@@ -24,7 +24,7 @@ export default function DetailsCard() {
 
 
   return (
-    <div className="base-cities details">
+    <div className="base-cities details-page">
       <div className="detail-element">
         <Card city={place} key={place.id}>
           {place.population ? "Population: " + place.population : "Capacity: " + place.capacity}
