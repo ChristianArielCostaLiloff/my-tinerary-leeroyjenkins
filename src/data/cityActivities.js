@@ -105,6 +105,21 @@ export const cityActivities = [
     userId: "user3",
   },
   {
+    id: "it8",
+    citiId: "city6",
+    name: "Camp Nou",
+    photo: [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Camp_Nou_més_que_un_club.jpg/1280px-Camp_Nou_més_que_un_club.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/3/3b/Campnou_colors.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Barcelona_273.JPG/1920px-Barcelona_273.JPG",
+    ],
+    description:
+      "Officially branded as Spotify Camp Nou for sponsorship reasons, is a football stadium in Barcelona, Spain. It has been the home stadium of FC Barcelona since its completion in 1957. With a current seating capacity of 99,354, it is the largest stadium in Spain and Europe, and the fourth largest association football stadium in the world.",
+    price: 5,
+    duration: 2,
+    userId: "user3",
+  },
+  {
     id: "it9",
     citiId: "city8",
     name: "Sensō-ji",
