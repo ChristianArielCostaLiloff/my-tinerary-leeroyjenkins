@@ -1,4 +1,4 @@
-let cityActivities = [
+export const cityActivities = [
   {
     id: "it1",
     citiId: "city1",
