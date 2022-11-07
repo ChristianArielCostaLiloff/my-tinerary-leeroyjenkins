@@ -1107,7 +1107,7 @@ select::-ms-expand {
   font-size: 15px;
 }
 
-.card_CH .content_card_CH .container_btn_CH button {
+.card_CH .content_card_CH .container_btn_CH a {
   background: #0089ba;
   padding: 5px 10px;
   color: #ffff;
@@ -1115,8 +1115,9 @@ select::-ms-expand {
   outline: none;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.card_CH .content_card_CH .container_btn_CH button:hover {
+.card_CH .content_card_CH .container_btn_CH a:hover {
   background: #017eac;
 }

@@ -7,6 +7,7 @@ import Layout from "./layouts/Layout";
 import SingUp from "./pages/SignUp";
 import Cities from "./pages/Cities";
 import Hotels from "./pages/Hotels";
+import DetailsCard from "./components/DetailsCard";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signup" element={<SingUp />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/hotels" element={<Hotels />}/>
+          <Route path="/details/:id" element={<DetailsCard />} />
         </Routes>
       </Layout>
     </BrowserRouter>

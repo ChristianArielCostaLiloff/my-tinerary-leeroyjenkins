@@ -1,4 +1,5 @@
 import React from "react";
+import CallToAction from "./CallToAction";
 
 export default function Card(props) {
   let { city } = props;
@@ -18,7 +19,7 @@ export default function Card(props) {
           <p>{props.children}</p>
         </div>
         <div className="container_btn_CH">
-          <button>View more</button>
+          <CallToAction path={"/details/" + city.id}>View more</CallToAction>
         </div>
       </div>
     </div>
