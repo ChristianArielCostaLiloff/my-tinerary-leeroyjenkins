@@ -1107,7 +1107,7 @@ select::-ms-expand {
   font-size: 15px;
 }
 
-.card_CH .content_card_CH .container_btn_CH button {
+.card_CH .content_card_CH .container_btn_CH a {
   background: #0089ba;
   padding: 5px 10px;
   color: #ffff;
@@ -1115,8 +1115,116 @@ select::-ms-expand {
   outline: none;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.card_CH .content_card_CH .container_btn_CH button:hover {
+.card_CH .content_card_CH .container_btn_CH a:hover {
   background: #017eac;
+}
+/* --- Details --- */
+.details{
+  background-image: url("/public/img/backgraound-details.png");
+  background-size: cover;
+}
+.detail-element{
+  height: 300px;
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.detail-shows{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+/* --- Event --- */
+.container_card_IS {
+  width: 600px;
+  display: flex;
+  height: 600px;
+}
+
+.card_IS {
+  width: 100%;
+  margin: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #ffff;
+  box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+  cursor: default;
+  transition: all 400ms ease;
+}
+.contain_IS{
+  height: 350px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.card_IS:hover {
+  box-shadow: 5px 5px 20px rgba(0,0,0,.4);
+  transform: translateY(-1%);
+}
+.card_IS figure{
+  width: 100%;
+  height: 210px;
+  overflow: hidden;
+}
+
+.card_IS img {
+  object-fit: cover;
+  width: 100%;
+  min-height: 210px;
+}
+
+.card_IS .contain_IS {
+  padding: 15px;
+  text-align: center;
+}
+
+.card_IS .contain_IS p {
+  line-height: 1.5;
+  color: #6a6a6a;
+}
+
+.card_IS .contain_IS h3 {
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+/* --- button details--- */
+#outer {
+  width: 200px;
+  text-align: center;
+}
+.button_slide {
+  background-color: #8b8b8b;
+  color: white;
+  border: 2px solid #8b8b8b;
+  border-radius: 0px;
+  padding: 9px 18px;
+  display: inline-block;
+  font-family: "Lucida Console", Monaco, monospace;
+  border-radius: 5px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0 #0089ba;
+  -webkit-transition: ease-out 0.4s;
+  -moz-transition: ease-out 0.4s;
+  transition: ease-out 0.4s;
+}
+
+.slide_down:hover {
+  border: 2px solid #0089ba;
+  box-shadow: inset 0 100px 0 0 #0089ba;
+}
+.price-button{
+  padding: 0px 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

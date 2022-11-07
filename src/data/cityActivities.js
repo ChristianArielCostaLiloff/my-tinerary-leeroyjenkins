@@ -1,4 +1,4 @@
-let cityActivities = [
+export const cityActivities = [
   {
     id: "it1",
     citiId: "city1",
@@ -100,6 +100,21 @@ let cityActivities = [
     ],
     description:
       "The Basílica i Temple Expiatori de la Sagrada Família is a church in the Eixample district of Barcelona, Catalonia, Spain, and is currently the largest unfinished Catholic church in the world. Designed by the Catalan architect Antoni Gaudí (1852-1926), his work on Sagrada Família is part of a UNESCO World Heritage Site. On 7 November 2010, Pope Benedict XVI consecrated the church and proclaimed it a minor basilica.",
+    price: 5,
+    duration: 2,
+    userId: "user3",
+  },
+  {
+    id: "it8",
+    citiId: "city6",
+    name: "Camp Nou",
+    photo: [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Camp_Nou_més_que_un_club.jpg/1280px-Camp_Nou_més_que_un_club.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/3/3b/Campnou_colors.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Barcelona_273.JPG/1920px-Barcelona_273.JPG",
+    ],
+    description:
+      "Officially branded as Spotify Camp Nou for sponsorship reasons, is a football stadium in Barcelona, Spain. It has been the home stadium of FC Barcelona since its completion in 1957. With a current seating capacity of 99,354, it is the largest stadium in Spain and Europe, and the fourth largest association football stadium in the world.",
     price: 5,
     duration: 2,
     userId: "user3",
