@@ -8,6 +8,7 @@ import SingUp from "./pages/SignUp";
 import Cities from "./pages/Cities";
 import Hotels from "./pages/Hotels";
 import DetailsCard from "./pages/DetailsCard";
+import NewCity from "./pages/NewCity";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/details/:id" element={<DetailsCard />} />
+          <Route path="/newcity" element={<NewCity />} />
         </Routes>
       </Layout>
     </BrowserRouter>
