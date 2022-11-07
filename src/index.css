@@ -591,7 +591,7 @@ nav {
 /* --- SIGN IN --- */
 
 .body{
-  height: 100vh;
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -604,7 +604,7 @@ nav {
 /* --- Sing Up --- */
 .page--sing-up {
   padding: 20px;
-  height: 95vh;
+  flex-grow: 1;
   min-height: 700px;
   display: flex;
   align-items: center;
@@ -1122,7 +1122,7 @@ select::-ms-expand {
   background: #017eac;
 }
 /* --- Details --- */
-.details{
+.details-page{
   background-image: url("/public/img/backgraound-details.png");
   background-size: cover;
 }
@@ -1138,10 +1138,12 @@ select::-ms-expand {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 /* --- Event --- */
 .container_card_IS {
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   display: flex;
   height: 600px;
 }
@@ -1227,4 +1229,8 @@ select::-ms-expand {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+/* --- New City --- */
+.new-city{
+  background-image: url("/public/img/background-new-city.jpg");
 }
