@@ -19,7 +19,7 @@ function App() {
           <Route path="/cities" element={<Cities />} />
           <Route path="/signup" element={<SingUp />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/hotels" element={<Hotels />}/>
+          <Route path="/hotels" element={<Hotels />} />
           <Route path="/details/:id" element={<DetailsCard />} />
         </Routes>
       </Layout>
