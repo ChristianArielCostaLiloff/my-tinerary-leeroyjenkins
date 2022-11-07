@@ -3,6 +3,11 @@ import CallToAction from "./CallToAction";
 
 export default function Card(props) {
   let { city } = props;
+  if (Array.isArray(city.photo)) {
+    city.photo = city.photo[0];
+  }
+  console.log(city.photo);
+  console.log(Array.isArray(city.photo));
   return (
     <div className="card_CH">
       <img
