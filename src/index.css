@@ -1234,3 +1234,7 @@ select::-ms-expand {
 .new-city{
   background-image: url("/public/img/background-new-city.jpg");
 }
+
+.new-hotel {
+  background-image: url("/public/img/background-newhotel.jpg");
+}
