@@ -49,7 +49,7 @@ export default function Cities() {
       <div className="card-container" id="container-card">
         {cities.length > 0 ? (
           cities.map((city) => (
-            <Card city={city} key={city.id}>
+            <Card element={city} key={city.id}>
               Population: {city.population}
             </Card>
           ))
