@@ -1,5 +1,7 @@
+import axios from "axios";
 import React from "react";
 import InputFormSign from "../components/InputFormSign";
+import apiUrl from "../url";
 
 export default function NewCity() {
   let newCity = () => {
@@ -8,9 +10,17 @@ export default function NewCity() {
       continent: document.getElementById("continent").value,
       photo: document.getElementById("photo").value,
       population: document.getElementById("population").value,
+      userId: "6370096b26cecde13c02e04c",
     };
-    localStorage.setItem("newCity", JSON.stringify(newCity));
-    window.location.reload(true);
+    console.log(newCity);
+    try {
+      axios.post(`${apiUrl}/api/city`, newCity);
+      alert("City created in BD");
+    } catch (error) {
+      alert("Error with axios");
+      console.log(error.message);
+    }
+    //window.location.reload(true);
   };
   return (
     <div className="body new-city">
