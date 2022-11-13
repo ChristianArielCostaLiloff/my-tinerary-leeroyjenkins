@@ -20,7 +20,7 @@ export default function NewCity() {
       alert("Error with axios");
       console.log(error.message);
     }
-    //window.location.reload(true);
+    window.location.reload(true);
   };
   return (
     <div className="body new-city">
