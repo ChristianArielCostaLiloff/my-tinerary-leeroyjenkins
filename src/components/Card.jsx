@@ -22,7 +22,7 @@ export default function Card(props) {
           <p>{props.children}</p>
         </div>
         <div className="container_btn_CH">
-          <CallToAction path={"/details/" + element.id}>View more</CallToAction>
+          <CallToAction path={"/details/" + element._id}>View more</CallToAction>
         </div>
       </div>
     </div>
