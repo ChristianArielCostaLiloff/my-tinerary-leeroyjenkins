@@ -12,7 +12,6 @@ export default function NewCity() {
       population: document.getElementById("population").value,
       userId: "6370096b26cecde13c02e04c",
     };
-    console.log(newCity);
     try {
       axios.post(`${apiUrl}/api/city`, newCity);
       alert("City created in BD");
