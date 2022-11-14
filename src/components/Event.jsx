@@ -19,7 +19,7 @@ export default function Event(props) {
               <p>
                 {event.duration
                   ? "Duration: " + event.duration + "h"
-                  : "Date: " + event.date.toDateString()}
+                  : "Date: " + event.date}
               </p>
               <p>Price ${event.price}</p>
               <div id="outer">
