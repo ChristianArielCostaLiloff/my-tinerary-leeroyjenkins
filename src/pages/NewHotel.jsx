@@ -1,16 +1,26 @@
 import React from 'react'
 import InputFormSign from '../components/InputFormSign'
+import apiUrl from '../url';
+import axios from 'axios';
 
 export default function NewHotel() {
     let newHotel = () => {
         let newHotel = {
-            name: document.getElementById("name").value,
-            photo: document.getElementById("photo").value,
-            capacity: document.getElementById("capacity").value,
+          name: document.getElementById("name").value,
+          photo: document.getElementById("photo").value,
+          capacity: document.getElementById("capacity").value,
+          cityId: "63701f25d10c25267b79e295",
+          userId: "6370096b26cecde13c02e04c",
         };
-        localStorage.setItem("newHotel", JSON.stringify(newHotel));
+        try {
+          axios.post(`${apiUrl}/api/hotel`, newHotel);
+          alert("Hotel created in BD");
+        } catch (error) {
+          alert("Error with axios");
+          console.log(error.message);
+        }
         window.location.reload(true);
-    };
+      };
     return (
         <div className="body new-hotel">
             <div className="container">
