@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Card from '../components/Card';
 import SearchBar from '../components/SearchBar';
-import { hotel as hotelsData } from "../data/hotels";
 import NoElementsFound from '../components/NoElementsFound';
-import { json } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from "../url";
 
@@ -51,7 +49,7 @@ export default function Hotels() {
           {hotels.length > 0 ? (
             hotels.map((hotel) => {
               return (
-                <Card element={hotel} key={hotel.id}>
+                <Card type='hotel' element={hotel} key={hotel.id}>
                   Capacity: {hotel.capacity}
                 </Card>
               );
