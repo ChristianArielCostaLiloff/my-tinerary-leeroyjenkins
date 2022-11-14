@@ -1,48 +1,55 @@
-import React, { useEffect, useState } from 'react'
-import Card from '../components/Card'
-import SearchBar from '../components/SearchBar'
-import { hotel as hotelsData } from "../data/hotels"
-import NoElementsFound from '../components/NoElementsFound'
-import { json } from 'react-router-dom'
+import React, { useEffect, useState, useRef } from 'react';
+import Card from '../components/Card';
+import SearchBar from '../components/SearchBar';
+import { hotel as hotelsData } from "../data/hotels";
+import NoElementsFound from '../components/NoElementsFound';
+import { json } from 'react-router-dom';
+import axios from 'axios';
+import apiUrl from "../url";
+
 
 export default function Hotels() {
-  let [hotel, setHotel] = useState(hotelsData);
+  let searchBar = useRef();
+  let [hotels, setHotels] = useState([]);
 
   useEffect(() => {
-    let mainNavBar = document.getElementById("hotels-nav");
-    mainNavBar.addEventListener("input", showSortedCard);
+    axios
+      .get(`${apiUrl}/api/hotel`)
+      .then((res) => {
+        setHotels(res.data.response);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
-  let showSortedCard = () => {
-    let searchText = document.getElementById("search-text").value.toLowerCase();
+  let sortCard = () => {
     let selectSort = document.getElementById("format").value.toLowerCase();
-        if (selectSort === 'low') {
-            hotel.sort((a, b) => a.capacity - b.capacity)
-    }
-        if (selectSort === 'high') {
-            hotel.sort((a, b) => b.capacity - a.capacity)
-    }
-        let sortedHotels = hotel.filter(hotel => hotel.name.toLowerCase().includes(searchText))
-        setHotel(sortedHotels)
-        console.log("Filtered by: SortedPer: " + selectSort + " Text: " + searchText);
-        localStorage.setItem("filterHotel", JSON.stringify({ text: searchText, sortPer: selectSort }))
+    axios
+      .get(
+        `${apiUrl}/api/hotel?order=${selectSort}&name=${searchBar.current.value}`
+      )
+      .then((res) => setHotels(res.data.response))
+      .catch((error) => console.log(error));
   };
+
+
   return (
     <>
       <div className="base-cities">
         <div className="cities-nav" id="hotels-nav">
-          <div className="select">
-            <select name="format" id="format">
-              <option defaultValue>Order by capacity</option>
-              <option value="high">From high to low</option>
-              <option value="low">From low to high</option>
-            </select>
-          </div>
-          <SearchBar />
+          <form className="nav_form" onChange={sortCard}>
+            <div className="select">
+              <select name="format" id="format">
+                <option defaultValue>Order by capacity</option>
+                <option value="desc">From high to low</option>
+                <option value="asc">From low to high</option>
+              </select>
+            </div>
+            <SearchBar reference={searchBar} onChange={sortCard} />
+          </form>
         </div>
         <div className="card-container">
-          {hotel.length > 0 ? (
-            hotel.map((hotel) => {
+          {hotels.length > 0 ? (
+            hotels.map((hotel) => {
               return (
                 <Card element={hotel} key={hotel.id}>
                   Capacity: {hotel.capacity}
@@ -55,5 +62,5 @@ export default function Hotels() {
         </div>
       </div>
     </>
-    )
+  )
 }
