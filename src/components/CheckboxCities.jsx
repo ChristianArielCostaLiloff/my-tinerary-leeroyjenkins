@@ -5,7 +5,7 @@ export default function CheckboxCities(props) {
   let { continent } = props;
   return (
     <>
-      <input type="checkbox" name="continent" id={continent.toLowerCase()} value={continent.toLowerCase()} />
+      <input type="checkbox" name="continent" id={continent.toLowerCase()} value={continent} />
       <label htmlFor={continent.toLowerCase()}>{continent}</label>
     </>
   );

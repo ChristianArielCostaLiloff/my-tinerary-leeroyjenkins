@@ -1,30 +1,45 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { cities as citiesData } from "../data/cities";
-import { cityActivities } from "../data/cityActivities";
 import Card from "../components/Card";
 import Event from "../components/Event";
 import NoElementsFound from "../components/NoElementsFound";
-import { hotel as hotelsData } from "../data/hotels";
-import { showsHotels } from "../data/showsHotels";
+import { useEffect } from "react";
+import axios from "axios";
+import apiUrl from "../url";
+import { useState } from "react";
 
 export default function DetailsCard() {
-  let { id } = useParams();
-  let city = citiesData.find((city) => city.id == id);
-  let hotel = hotelsData.find((hotel) => hotel.id == id);
-  let event, place;
-  if (city !== undefined) {
-    event = cityActivities.filter((activty) => activty.citiId == id);
-    place = city;
-  } else {
-    event = showsHotels.filter((show) => show.hotelId == id);
-    place = hotel;
-  }
+  let { id, type } = useParams();
+  let [place, setPlace] = useState([]);
+  let [event, setEvent] = useState([]);
+
+  useEffect(() => {
+    if (type === 'hotel') {
+      axios
+        .get(`${apiUrl}/api/hotel/${id}`)
+        .then((res) => setPlace(res.data.response))
+        .catch((error) => console.log(error));
+      axios
+        .get(`${apiUrl}/api/show?hotelId=${id}`)
+        .then((res) => setEvent(res.data.response))
+        .catch((error) => console.log(error));
+    }
+    if (type === 'city') {
+      axios
+        .get(`${apiUrl}/api/city/${id}`)
+        .then((res) => setPlace(res.data.response))
+        .catch((error) => console.log(error));
+      axios
+        .get(`${apiUrl}/api/itinerary/?cityId=${id}`)
+        .then((res) => setEvent(res.data.response))
+        .catch((error) => console.log(error));
+    }
+  }, []);
 
   return (
     <div className="base-cities details-page">
       <div className="detail-element">
-        <Card city={place} key={place.id}>
+        <Card element={place} key={place.id}>
           {place.population
             ? "Population: " + place.population
             : "Capacity: " + place.capacity}

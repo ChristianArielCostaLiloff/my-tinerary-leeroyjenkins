@@ -2,7 +2,7 @@ import React from "react";
 import CallToAction from "./CallToAction";
 
 export default function Card(props) {
-  let { element } = props;
+  let { element, type } = props;
   if (Array.isArray(element.photo)) {
     element.photo = element.photo[0];
   }
@@ -22,7 +22,7 @@ export default function Card(props) {
           <p>{props.children}</p>
         </div>
         <div className="container_btn_CH">
-          <CallToAction path={"/details/" + element.id}>View more</CallToAction>
+          <CallToAction path={"/details/" + type + "/" + element._id}>View more</CallToAction>
         </div>
       </div>
     </div>
