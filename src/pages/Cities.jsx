@@ -14,7 +14,7 @@ export default function Cities() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!filter && cities.length < 1) {
+    if ((!filter.name || !filter.continent) && cities.length < 1) {
       dispatch(cityActions.getCities());
     } else {
       dispatch(cityActions.getCitiesByNameAndContinent(filter));
