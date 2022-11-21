@@ -22,6 +22,7 @@ const getCitiesByNameAndContinent = createAsyncThunk(
     );
     return {
       cities: citiesFiltered.data.response,
+      filter: filters,
     };
   }
 );

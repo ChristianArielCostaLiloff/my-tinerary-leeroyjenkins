@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Card";
@@ -10,12 +10,15 @@ import cityActions from "../redux/actions/cityActions";
 export default function Cities() {
   const checkboxRef = useRef([]);
   const searchRef = useRef();
-  let cities = useSelector((store) => store.cityReducer.cities);
-  let continents = useSelector((store) => store.cityReducer.continent);
+  let { cities, continent, filter } = useSelector((store) => store.cityReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(cityActions.getCities());
+    if (cities.length < 1) {
+      dispatch(cityActions.getCities());
+    } else {
+      dispatch(cityActions.getCitiesByNameAndContinent(filter));
+    }
   }, []);
 
   const handleChange = () => {
@@ -36,19 +39,20 @@ export default function Cities() {
             <div className="form_checkbox">
               <div className="checkboxes">
                 <h2>Search by continent</h2>
-                {continents.map((continent, index) => (
+                {continent.map((continent, index) => (
                   <CheckboxCities
                     key={index}
                     continent={continent}
                     reference={(checkbox) =>
                       (checkboxRef.current[index] = checkbox)
                     }
+                    check={filter.continent.includes(continent)}
                   />
                 ))}
               </div>
             </div>
           </div>
-          <SearchBar reference={searchRef} />
+          <SearchBar reference={searchRef} value={filter.name} />
         </form>
       </div>
       <div className="card-container" id="container-card">

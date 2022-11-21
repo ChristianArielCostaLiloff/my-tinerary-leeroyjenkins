@@ -6,6 +6,10 @@ const { getCities, getCitiesByNameAndContinent } = cityActions;
 const initialState = {
   cities: [],
   continent: [],
+  filter: {
+    name: "",
+    continent: [],
+  },
 };
 
 const cityReducer = createReducer(initialState, (builder) => {
@@ -18,7 +22,11 @@ const cityReducer = createReducer(initialState, (builder) => {
   });
 
   builder.addCase(getCitiesByNameAndContinent.fulfilled, (state, action) => {
-    return { ...state, cities: action.payload.cities };
+    return {
+      ...state,
+      cities: action.payload.cities,
+      filter: action.payload.filter,
+    };
   });
 });
 
