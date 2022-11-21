@@ -3,14 +3,15 @@ import CallToAction from "./CallToAction";
 
 export default function Card(props) {
   let { element, type } = props;
-  if (Array.isArray(element.photo)) {
-    element.photo = element.photo[0];
+  let photo = element.photo
+  if (Array.isArray(photo)) {
+    photo = photo[0];
   }
   return (
     <div className="card_CH">
       <img
         className="img_card_CH"
-        src={element.photo}
+        src={photo}
         alt={element.name + " picture"}
       />
       <div className="content_card_CH">
