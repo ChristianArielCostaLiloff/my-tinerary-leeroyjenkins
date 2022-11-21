@@ -1,5 +1,6 @@
 import cityReducer from "./cityReducer";
+import hotelReducer from "./hotelReducer";
 
-const rootReducer = { cityReducer };
+const rootReducer = { cityReducer, hotelReducer };
 
 export default rootReducer;
