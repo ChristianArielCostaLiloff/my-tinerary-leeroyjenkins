@@ -10,6 +10,8 @@ import Hotels from "./pages/Hotels";
 import DetailsCard from "./pages/DetailsCard";
 import NewCity from "./pages/NewCity";
 import NewHotel from "./pages/NewHotel";
+import MyCities from "./pages/MyCities";
+import CityEdit from "./pages/CityEdit";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="/details/:type/:id" element={<DetailsCard />} />
           <Route path="/newcity" element={<NewCity />} />
           <Route path="/newhotel" element={<NewHotel />} />
+          <Route path="/cities/:userId" element={<MyCities />} />
+          <Route path="/cities/edit/:id" element={<CityEdit />} />
         </Routes>
       </Layout>
     </BrowserRouter>
