@@ -70,6 +70,11 @@ export default function NavBar() {
                   City
                 </CallToAction>
               </li>
+              <li>
+                <CallToAction path="/itinerary/6370096b26cecde13c02e04c" style="menu--vertical-element">
+                  Itinerary
+                </CallToAction>
+              </li>
             </ul>
           </li>
         </ul>
