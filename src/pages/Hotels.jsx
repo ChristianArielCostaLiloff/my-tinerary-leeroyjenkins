@@ -48,7 +48,7 @@ export default function Hotels() {
           {hotels.length > 0 ? (
             hotels.map((hotel) => {
               return (
-                <Card type='hotel' element={hotel} key={hotel.id}>
+                <Card type='hotel' element={hotel} key={hotel.id} editMode={false}>
                   Capacity: {hotel.capacity}
                 </Card>
               );

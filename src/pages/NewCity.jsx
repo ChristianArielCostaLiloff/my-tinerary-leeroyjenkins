@@ -30,7 +30,6 @@ export default function NewCity() {
       }).then(async (result) => {
         if (result.isConfirmed) {
           let res = await axios.post(`${apiUrl}/api/city`, newCity);
-          console.log(res);
           if (res.data.success) {
             Swal.fire("Builded!", "Your city has been raised", "success").then(
               (result) => {
