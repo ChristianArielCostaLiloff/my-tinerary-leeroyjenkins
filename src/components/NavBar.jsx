@@ -75,6 +75,11 @@ export default function NavBar() {
                   Itinerary
                 </CallToAction>
               </li>
+              <li>
+                <CallToAction path="/hotels/6370096b26cecde13c02e04c" style="menu--vertical-element">
+                  Hotel
+                </CallToAction>
+              </li>
             </ul>
           </li>
         </ul>

@@ -14,6 +14,9 @@ import MyCities from "./pages/MyCities";
 import CityEdit from "./pages/CityEdit";
 import MyTineraries from "./pages/MyTineraries";
 import ItineraryEdit from "./pages/ItineraryEdit";
+import MyHotels from "./pages/MyHotels";
+import HotelEdit from "./pages/HotelEdit";
+
 
 function App() {
   return (
@@ -33,6 +36,9 @@ function App() {
           <Route path="/cities/edit/:id" element={<CityEdit />} />
           <Route path="/itinerary/:userId" element={<MyTineraries />} />
           <Route path="/itinerary/edit/:id" element={<ItineraryEdit />} />
+          <Route path="/hotels/:userId" element={<MyHotels />} />
+          <Route path="/hotels/edit/:id" element={<HotelEdit />} />
+
         </Routes>
       </Layout>
     </BrowserRouter>
