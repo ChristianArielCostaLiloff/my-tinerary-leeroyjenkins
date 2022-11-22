@@ -1197,7 +1197,20 @@ select::-ms-expand {
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
   cursor: default;
   transition: all 400ms ease;
+  position: relative;
 }
+/* ---Event buttons --- */
+.btn-event-delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.btn-event-edit {
+  position: absolute;
+  top: 40px;
+  right: 5px;
+}
+
 .contain_IS {
   height: 350px;
   flex-grow: 1;
