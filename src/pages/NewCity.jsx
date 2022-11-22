@@ -1,26 +1,59 @@
 import axios from "axios";
 import React from "react";
+import { useRef } from "react";
+import Swal from "sweetalert2";
 import InputFormSign from "../components/InputFormSign";
 import apiUrl from "../url";
 
 export default function NewCity() {
+  const name = useRef(null);
+  const continent = useRef(null);
+  const photo = useRef(null);
+  const population = useRef(null);
+
   let newCity = () => {
     let newCity = {
-      name: document.getElementById("name").value,
-      continent: document.getElementById("continent").value,
-      photo: document.getElementById("photo").value,
-      population: document.getElementById("population").value,
+      name: name.current.value,
+      continent: continent.current.value,
+      photo: photo.current.value,
+      population: population.current.value,
       userId: "6370096b26cecde13c02e04c",
     };
     try {
-      axios.post(`${apiUrl}/api/city`, newCity);
-      alert("City created in BD");
+      Swal.fire({
+        title: "Do you want create this city?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#006466",
+        cancelButtonColor: "#212F45",
+        confirmButtonText: "Create city",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          let res = await axios.post(`${apiUrl}/api/city`, newCity);
+          console.log(res);
+          if (res.data.success) {
+            Swal.fire("Builded!", "Your city has been raised", "success").then(
+              (result) => {
+                if (result.isConfirmed) {
+                  window.location.href =`/details/city/${res.data.id}`;
+                }
+              }
+            );
+          } else {
+            Swal.fire(
+              "Something went wrong!",
+              res.data.message.join("<br>"),
+              "error"
+            );
+          }
+        }
+      });
     } catch (error) {
       alert("Error with axios");
       console.log(error.message);
     }
-    window.location.reload(true);
   };
+
   return (
     <div className="body new-city">
       <div className="container">
@@ -28,20 +61,32 @@ export default function NewCity() {
         <div className="content">
           <form>
             <div className="user-details">
-              <InputFormSign type="text" id="name" text="Enter city name">
+              <InputFormSign
+                type="text"
+                reference={name}
+                text="Enter city name"
+              >
                 City Name
               </InputFormSign>
-              <InputFormSign type="text" id="continent" text="Enter continent">
+              <InputFormSign
+                type="text"
+                reference={continent}
+                text="Enter continent"
+              >
                 Continent
               </InputFormSign>
-              <InputFormSign type="text" id="photo" text="Enter photo url">
+              <InputFormSign
+                type="text"
+                reference={photo}
+                text="Enter photo url"
+              >
                 Photo URL
               </InputFormSign>
               <div className="input-box">
                 <span className="details">Population</span>
                 <input
                   type="number"
-                  id="population"
+                  ref={population}
                   placeholder="Enter population"
                   required
                   min="0"
