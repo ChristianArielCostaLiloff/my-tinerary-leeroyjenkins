@@ -27,9 +27,15 @@ const getCitiesByNameAndContinent = createAsyncThunk(
   }
 );
 
+const deleteCity = createAsyncThunk("deleteCity", async (cityId) => {
+  const res = await axios.delete(`${apiUrl}/api/city/${cityId}`);
+  return { cityId: res.data.cityId };
+});
+
 const cityActions = {
   getCities,
   getCitiesByNameAndContinent,
+  deleteCity,
 };
 
 export default cityActions;
