@@ -80,6 +80,11 @@ export default function NavBar() {
                   Hotel
                 </CallToAction>
               </li>
+              <li>
+                <CallToAction path="/shows/6370108133221044233a1930" style="menu--vertical-element">
+                  Show
+                </CallToAction>
+              </li>
             </ul>
           </li>
         </ul>

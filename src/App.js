@@ -16,6 +16,8 @@ import MyTineraries from "./pages/MyTineraries";
 import ItineraryEdit from "./pages/ItineraryEdit";
 import MyHotels from "./pages/MyHotels";
 import HotelEdit from "./pages/HotelEdit";
+import MyShows from "./pages/MyShows";
+import ShowEdit from "./pages/ShowEdit";
 
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
           <Route path="/itinerary/edit/:id" element={<ItineraryEdit />} />
           <Route path="/hotels/:userId" element={<MyHotels />} />
           <Route path="/hotels/edit/:id" element={<HotelEdit />} />
+          <Route path="/shows/:userId" element={<MyShows />} />
+          <Route path="/shows/edit/:id" element={<ShowEdit />} />
 
         </Routes>
       </Layout>
