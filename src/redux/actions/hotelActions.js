@@ -22,9 +22,15 @@ const getHotelsByNameAndSorted = createAsyncThunk(
   }
 );
 
+const deleteHotel = createAsyncThunk("deleteHotel", async (hotelId) => {
+  const res = await axios.delete(`${apiUrl}/api/hotel/${hotelId}`);
+  return { hotelId: res.data.hotelId };
+});
+
 const hotelActions = {
   getHotels,
   getHotelsByNameAndSorted,
+  deleteHotel
 };
 
 export default hotelActions;
