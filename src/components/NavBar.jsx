@@ -62,6 +62,16 @@ export default function NavBar() {
               </li>
             </ul>
           </li>
+          <li>
+            <p className="menu--horizontal-element">Edit</p>
+            <ul className="menu--vertical">
+              <li>
+                <CallToAction path="/cities/6370096b26cecde13c02e04c" style="menu--vertical-element">
+                  City
+                </CallToAction>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
       <div className="hamburger-menu">
