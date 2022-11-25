@@ -11,7 +11,7 @@ const itineraryReducer = createReducer(initialState, (builder) => {
   builder.addCase(deleteItinerary.fulfilled, (state, action) => {
     return {
       ...state,
-      cities: state.itineraries.filter(
+      itineraries: state.itineraries.filter(
         (itinerary) => itinerary._id !== action.payload.itineraryId
       ),
     };
