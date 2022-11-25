@@ -1,11 +1,13 @@
 import axios from "axios";
 import React from "react";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputFormSign from "../components/InputFormSign";
 import apiUrl from "../url";
 
 export default function NewCity() {
+  const navigate = useNavigate();
   const name = useRef(null);
   const continent = useRef(null);
   const photo = useRef(null);
@@ -34,7 +36,7 @@ export default function NewCity() {
             Swal.fire("Builded!", "Your city has been raised", "success").then(
               (result) => {
                 if (result.isConfirmed) {
-                  window.location.href =`/details/city/${res.data.id}`;
+                  navigate(`/details/city/${res.data.id}`);
                 }
               }
             );

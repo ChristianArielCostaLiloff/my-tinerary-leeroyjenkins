@@ -81,7 +81,7 @@ export default function NavBar() {
                 </CallToAction>
               </li>
               <li>
-                <CallToAction path="/shows/6370108133221044233a1930" style="menu--vertical-element">
+                <CallToAction path="/shows/6370096b26cecde13c02e04c" style="menu--vertical-element">
                   Show
                 </CallToAction>
               </li>
@@ -116,8 +116,23 @@ export default function NavBar() {
             </CallToAction>
           </li>
           <li>
-            <CallToAction path="/signup" style="menu__item" >
-              Sign up
+            <CallToAction path="/cities/6370096b26cecde13c02e04c" style="menu__item" >
+              Edit City
+            </CallToAction>
+          </li>
+          <li>
+            <CallToAction path="/itinerary/6370096b26cecde13c02e04c" style="menu__item" >
+              Edit Itinerary
+            </CallToAction>
+          </li>
+          <li>
+            <CallToAction path="/hotels/6370096b26cecde13c02e04c" style="menu__item" >
+              Edit Hotel
+            </CallToAction>
+          </li>
+          <li>
+            <CallToAction path="/shows/6370096b26cecde13c02e04c" style="menu__item" >
+              Edit Show
             </CallToAction>
           </li>
         </ul>

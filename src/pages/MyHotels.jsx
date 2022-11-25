@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import apiUrl from "../url";
 import Card from "../components/Card";
 import NoElementsFound from "../components/NoElementsFound";
@@ -10,6 +10,7 @@ import hotelActions from "../redux/actions/hotelActions";
 import Swal from "sweetalert2";
 
 export default function MyHotels() {
+  const navigate = useNavigate();
   const { userId } = useParams();
   let [hotels, setHotels] = useState([]);
   const dispatch = useDispatch();
@@ -33,13 +34,13 @@ export default function MyHotels() {
       confirmButtonText: "Delete hotel",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(hotelActions.deleteHotel(id)).then(window.location.reload(true));
+        dispatch(hotelActions.deleteHotel(id)).then(navigate(0));
       }
     });
   };
 
   const handleClickEdit = (id) => {
-    window.location.href = `/hotels/edit/${id}`;
+    navigate(`/hotels/edit/${id}`);
   };
 
   return (
