@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import Event from "../components/Event";
 import NoElementsFound from "../components/NoElementsFound";
@@ -13,6 +13,7 @@ export default function MyShows() {
   const { userId } = useParams();
   let [show, setShow] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -33,15 +34,13 @@ export default function MyShows() {
       confirmButtonText: "Delete show",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(showActions.deleteShow(id)).then(
-          window.location.reload(true)
-        );
+        dispatch(showActions.deleteShow(id)).then(navigate(0));
       }
     });
   };
 
   const handleClickEdit = (id) => {
-    window.location.href = `/shows/edit/${id}`;
+    navigate(`/shows/edit/${id}`);
   };
 
   return (

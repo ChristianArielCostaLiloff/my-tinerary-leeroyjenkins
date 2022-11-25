@@ -3,61 +3,108 @@ import GoogleButton from "../components/GoogleButton";
 import InputFormSign from "../components/InputFormSign";
 
 export default function SingUp() {
-  let form = useRef(null);
+  const name = useRef(null);
+  const username = useRef(null);
+  const email = useRef(null);
+  const phone = useRef(null);
+  const password = useRef(null);
+  const passwordConfirmation = useRef(null);
+  const radioMale = useRef(null);
+  const radioFemale = useRef(null);
+  const radioNot = useRef(null);
 
-  let signUp = () => {
+  const radioChecked = () => {
+    if (radioMale.current.checked) {
+      return radioMale.current.value;
+    }
+    if (radioFemale.current.checked) {
+      return radioFemale.current.value;
+    }
+    if (radioNot.current.checked) {
+      return radioNot.current.value;
+    }
+  };
+
+  let handleSubmit = () => {
     let profile = {
-      name: document.getElementById("name").value,
-      username: document.getElementById("username").value,
-      email: document.getElementById("email").value,
-      phone: document.getElementById("phone").value,
-      password: document.getElementById("password").value,
-      passwordConfirmation: document.getElementById("password-confirmation")
-        .value,
-      gender: document.querySelector("input[name='gender']:checked").value,
+      name: name.current.value,
+      username: username.current.value,
+      email: email.current.value,
+      phone: phone.current.value,
+      password: password.current.value,
+      passwordConfirmation: passwordConfirmation.current.value,
+      gender: radioChecked(),
     };
+    console.log(profile);
     if (profile.password != profile.passwordConfirmation) {
       alert("Password confirmation not match");
     } else {
-      console.log(profile);
       localStorage.setItem("profile", JSON.stringify(profile));
       alert("You Sing Up successfully");
     }
-    window.location.reload(true);
   };
+
+
   return (
     <div className="page--sing-up">
       <div className="container">
         <div className="title">Registration</div>
         <div className="content">
-          <form onSubmit={signUp} ref={form}>
+          <form onSubmit={handleSubmit}>
             <div className="user-details">
-              <InputFormSign text="Enter your name" id="name" type="text">
+              <InputFormSign
+                text="Enter your name"
+                reference={name}
+                type="text"
+              >
                 Full Name
               </InputFormSign>
-              <InputFormSign text="Enter your username" id="username" type="text">
+              <InputFormSign
+                text="Enter your username"
+                reference={username}
+                type="text"
+              >
                 Username
               </InputFormSign>
-              <InputFormSign text="Enter your email" id="email" type="text">
+              <InputFormSign
+                text="Enter your email"
+                reference={email}
+                type="text"
+              >
                 Email
               </InputFormSign>
-              <InputFormSign text="Enter your number" id="phone" type="text">
+              <InputFormSign
+                text="Enter your number"
+                reference={phone}
+                type="text"
+              >
                 Phone Number
               </InputFormSign>
-              <InputFormSign text="Enter your password" id="password" type="password">
+              <InputFormSign
+                text="Enter your password"
+                reference={password}
+                type="password"
+              >
                 Password
               </InputFormSign>
               <InputFormSign
                 text="Confirm your password"
-                id="password-confirmation" type="password"
+                reference={passwordConfirmation}
+                type="password"
               >
                 Confirm Password
               </InputFormSign>
             </div>
             <div className="gender-details">
-              <input type="radio" name="gender" id="dot-1" value="Male" />
-              <input type="radio" name="gender" id="dot-2" value="Female" />
-              <input type="radio" name="gender" id="dot-3" value="Undeclared" />
+              <input type="radio" name="gender" id="dot-1" value="Male" ref={radioMale}/>
+              <input type="radio" name="gender" id="dot-2" value="Female" ref={radioFemale}/>
+              <input
+                type="radio"
+                name="gender"
+                id="dot-3"
+                value="Undeclared"
+                ref={radioNot}
+              />
               <span className="gender-title">Gender</span>
               <div className="category">
                 <label htmlFor="dot-1">
@@ -77,9 +124,7 @@ export default function SingUp() {
             <div className="button">
               <input type="submit" id="btn-submit" value="Register" />
             </div>
-            <GoogleButton>
-              Sign in with Google
-            </GoogleButton>
+            <GoogleButton>Sign in with Google</GoogleButton>
           </form>
         </div>
       </div>

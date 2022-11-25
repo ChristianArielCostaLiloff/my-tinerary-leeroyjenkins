@@ -3,54 +3,55 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputFormSign from "../components/InputFormSign";
 import apiUrl from "../url";
 
 export default function ShowEdit() {
-    const name = useRef(null);
-    const description = useRef(null);
-    const photo = useRef(null);
-    const price = useRef(null);
-    const date = useRef(null)
-    const { id } = useParams();
-    let [showDb, setShowDb] = useState([]);
-  
-    useEffect( () => {
-       axios
-        .get(`${apiUrl}/api/show/${id}`)
-        .then((res) => setShowDb(res.data.response))
-        .catch((error) => console.log(error));
-    });
-  
-    const handleClick = async () => {
-      let show = {
-        name: name.current.value,
-        description: description.current.value,
-        photo: photo.current.value,
-        price: price.current.value,
-        date: date.current.value,
-        hotelId: "63716c6edd2cbad3afa9f85e",
-        userId: "6370096b26cecde13c02e04c",
-      };
-      const res = await axios.patch(`${apiUrl}/api/show/${id}`, show);
-      if (res.data.success) {
-        Swal.fire("Success!", "Your show has been updated", "success").then(
-          (result) => {
-            if (result.isConfirmed) {
-              window.location.href = `/details/hotels/${res.data.data.hotelId}`;
-            }
-          }
-        );
-      } else {
-        Swal.fire(
-          "Something went wrong!",
-          res.data.message.join("<br>"),
-          "error"
-        );
-      }
+  const navigate = useNavigate();
+  const name = useRef(null);
+  const description = useRef(null);
+  const photo = useRef(null);
+  const price = useRef(null);
+  const date = useRef(null);
+  const { id } = useParams();
+  let [showDb, setShowDb] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/api/show/${id}`)
+      .then((res) => setShowDb(res.data.response))
+      .catch((error) => console.log(error));
+  });
+
+  const handleClick = async () => {
+    console.log(new Date(date.current.value));
+    let show = {
+      name: name.current.value,
+      description: description.current.value,
+      photo: photo.current.value,
+      price: price.current.value,
+      date: new Date(date.current.value),
+      userId: "6370096b26cecde13c02e04c",
     };
+    const res = await axios.patch(`${apiUrl}/api/show/${id}`, show);
+    if (res.data.success) {
+      Swal.fire("Success!", "Your show has been updated", "success").then(
+        (result) => {
+          if (result.isConfirmed) {
+            navigate(`/details/hotel/${res.data.data.hotelId}`);
+          }
+        }
+      );
+    } else {
+      Swal.fire(
+        "Something went wrong!",
+        res.data.message.join("<br>"),
+        "error"
+      );
+    }
+  };
   return (
     <div className="body new-city">
       <div className="container">
@@ -93,7 +94,7 @@ export default function ShowEdit() {
               <div className="input-box">
                 <span className="details">Date</span>
                 <input
-                  type="number"
+                  type="date"
                   ref={date}
                   placeholder="Enter date"
                   required
@@ -103,15 +104,11 @@ export default function ShowEdit() {
               </div>
             </div>
             <div className="button">
-              <input
-                type="button"
-                onClick={handleClick}
-                value="Update show"
-              />
+              <input type="button" onClick={handleClick} value="Update show" />
             </div>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -3,12 +3,13 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputFormSign from "../components/InputFormSign";
 import apiUrl from "../url";
 
 export default function CityEdit() {
+  const navigate = useNavigate();
   const name = useRef(null);
   const continent = useRef(null);
   const photo = useRef(null);
@@ -16,8 +17,8 @@ export default function CityEdit() {
   const { id } = useParams();
   let [cityDb, setCityDb] = useState([]);
 
-  useEffect( () => {
-     axios
+  useEffect(() => {
+    axios
       .get(`${apiUrl}/api/city/${id}`)
       .then((res) => setCityDb(res.data.response))
       .catch((error) => console.log(error));
@@ -36,7 +37,7 @@ export default function CityEdit() {
       Swal.fire("Success!", "Your city has been updated", "success").then(
         (result) => {
           if (result.isConfirmed) {
-            window.location.href = `/details/city/${res.data.data._id}`;
+            navigate(`/details/city/${res.data.data._id}`);
           }
         }
       );
@@ -90,11 +91,7 @@ export default function CityEdit() {
               </div>
             </div>
             <div className="button">
-              <input
-                type="button"
-                onClick={handleClick}
-                value="Update city"
-              />
+              <input type="button" onClick={handleClick} value="Update city" />
             </div>
           </form>
         </div>
