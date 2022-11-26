@@ -62,6 +62,31 @@ export default function NavBar() {
               </li>
             </ul>
           </li>
+          <li>
+            <p className="menu--horizontal-element">Edit</p>
+            <ul className="menu--vertical">
+              <li>
+                <CallToAction path="/cities/6370096b26cecde13c02e04c" style="menu--vertical-element">
+                  City
+                </CallToAction>
+              </li>
+              <li>
+                <CallToAction path="/itinerary/6370096b26cecde13c02e04c" style="menu--vertical-element">
+                  Itinerary
+                </CallToAction>
+              </li>
+              <li>
+                <CallToAction path="/hotels/6370096b26cecde13c02e04c" style="menu--vertical-element">
+                  Hotel
+                </CallToAction>
+              </li>
+              <li>
+                <CallToAction path="/shows/6370096b26cecde13c02e04c" style="menu--vertical-element">
+                  Show
+                </CallToAction>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
       <div className="hamburger-menu">
@@ -91,8 +116,23 @@ export default function NavBar() {
             </CallToAction>
           </li>
           <li>
-            <CallToAction path="/signup" style="menu__item" >
-              Sign up
+            <CallToAction path="/cities/6370096b26cecde13c02e04c" style="menu__item" >
+              Edit City
+            </CallToAction>
+          </li>
+          <li>
+            <CallToAction path="/itinerary/6370096b26cecde13c02e04c" style="menu__item" >
+              Edit Itinerary
+            </CallToAction>
+          </li>
+          <li>
+            <CallToAction path="/hotels/6370096b26cecde13c02e04c" style="menu__item" >
+              Edit Hotel
+            </CallToAction>
+          </li>
+          <li>
+            <CallToAction path="/shows/6370096b26cecde13c02e04c" style="menu__item" >
+              Edit Show
             </CallToAction>
           </li>
         </ul>
