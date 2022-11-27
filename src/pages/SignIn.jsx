@@ -8,34 +8,38 @@ import userActions from "../redux/actions/userActions";
 import Swal from "sweetalert2";
 
 export default function SignIn() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const email = useRef(null)
-  const pass = useRef(null)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const email = useRef(null);
+  const pass = useRef(null);
 
   let handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     let user = {
       email: email.current.value,
       password: pass.current.value,
     };
-    await dispatch(userActions.login(user)).then(res => {
-
+    try {
+      const res = await dispatch(userActions.login(user));
+      console.log(res)
       if (res.payload.success) {
-        Swal.fire(
-          "Logued in", "You are being redirected", "success"
-        ).then(result => {
-          if (result.isConfirmed) navigate("/")
-        })
+        Swal.fire(res.payload.data.message, "You are being redirected", "success").then(
+          (result) => {
+            if (result.isConfirmed) navigate("/");
+          }
+        );
       } else {
         Swal.fire(
-          "Error!", res.payload.response, "error"
-        )
+          "Error!",
+          Array.isArray(res.payload.response)
+            ? res.payload.response.join("<br>")
+            : res.payload.response,
+          "error"
+        );
       }
-
-    }).catch((error) => {
+    } catch (error) {
       console.log(error);
-    })
+    }
   };
 
   return (
@@ -46,7 +50,11 @@ export default function SignIn() {
           <div className="content">
             <form onSubmit={handleSubmit}>
               <div className="user-details">
-                <InputFormSign type="text" reference={email} text="Enter your email">
+                <InputFormSign
+                  type="text"
+                  reference={email}
+                  text="Enter your email"
+                >
                   Email
                 </InputFormSign>
                 <InputFormSign

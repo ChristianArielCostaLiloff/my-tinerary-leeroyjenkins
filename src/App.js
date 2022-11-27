@@ -25,14 +25,13 @@ import userActions from "./redux/actions/userActions";
 
 function App() {
   const dispatch = useDispatch()
-  const token = JSON.parse(localStorage.getItem("token"))
-
+  
   useEffect(() => {
+    let token = JSON.parse(localStorage.getItem("token"))
     if (token) {
       dispatch(userActions.reLogin(token.token.user))
     }
   })
-
 
   return (
     <BrowserRouter>

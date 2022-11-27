@@ -3,7 +3,12 @@ import userActions from "../actions/userActions";
 const { login, reLogin } = userActions;
 
 const initialState = {
-  user: {},
+  name: "",
+  email: "",
+  photo: "",
+  logged: false,
+  role: "",
+  token: "",
 };
 
 const userReducer = createReducer(initialState, (builder) => {
@@ -34,8 +39,9 @@ const userReducer = createReducer(initialState, (builder) => {
       }
     })
     .addCase(reLogin.fulfilled, (state, action) => {
-      const { user, token } = action.payload.response;
       if (action.payload.success) {
+        let { user, token } = action.payload.response;
+        console.log(action)
         return {
           ...state,
           name: user.name,
