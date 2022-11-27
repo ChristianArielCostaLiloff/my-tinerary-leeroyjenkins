@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import apiUrl from "../url";
 import Card from "../components/Card";
 import NoElementsFound from "../components/NoElementsFound";
@@ -10,6 +10,7 @@ import cityActions from "../redux/actions/cityActions";
 import Swal from "sweetalert2";
 
 export default function MyCities() {
+  const navigate = useNavigate();
   const { userId } = useParams();
   let [cities, setCities] = useState([]);
   const dispatch = useDispatch();
@@ -33,13 +34,13 @@ export default function MyCities() {
       confirmButtonText: "Delete city",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(cityActions.deleteCity(id)).then(window.location.reload(true));
+        dispatch(cityActions.deleteCity(id)).then(navigate(0));
       }
     });
   };
 
   const handleClickEdit = (id) => {
-    window.location.href = `/cities/edit/${id}`;
+    navigate(`/cities/edit/${id}`);
   };
 
   return (
