@@ -3,20 +3,21 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputFormSign from "../components/InputFormSign";
 import apiUrl from "../url";
 
 export default function HotelEdit() {
+  const navigate = useNavigate();
   const name = useRef(null);
   const photo = useRef(null);
   const capacity = useRef(null);
   const { id } = useParams();
   let [hotelDb, setHotelDb] = useState([]);
 
-  useEffect( () => {
-     axios
+  useEffect(() => {
+    axios
       .get(`${apiUrl}/api/hotel/${id}`)
       .then((res) => setHotelDb(res.data.response))
       .catch((error) => console.log(error));
@@ -35,7 +36,7 @@ export default function HotelEdit() {
       Swal.fire("Success!", "Your hotel has been updated", "success").then(
         (result) => {
           if (result.isConfirmed) {
-            window.location.href = `/details/hotel/${res.data.data._id}`;
+            navigate(`/details/hotel/${res.data.data._id}`);
           }
         }
       );
@@ -82,11 +83,7 @@ export default function HotelEdit() {
               </div>
             </div>
             <div className="button">
-              <input
-                type="button"
-                onClick={handleClick}
-                value="Update hotel"
-              />
+              <input type="button" onClick={handleClick} value="Update hotel" />
             </div>
           </form>
         </div>

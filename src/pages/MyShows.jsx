@@ -41,6 +41,7 @@ export default function MyShows() {
 
   const handleClickEdit = (id) => {
     navigate(`/shows/edit/${id}`);
+  };
 
   return (
     <div className="base-cities">
