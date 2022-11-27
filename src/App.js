@@ -18,9 +18,22 @@ import MyHotels from "./pages/MyHotels";
 import HotelEdit from "./pages/HotelEdit";
 import MyShows from "./pages/MyShows";
 import ShowEdit from "./pages/ShowEdit";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import userActions from "./redux/actions/userActions";
 
 
 function App() {
+  const dispatch = useDispatch()
+  const token = JSON.parse(localStorage.getItem("token"))
+
+  useEffect(() => {
+    if (token) {
+      dispatch(userActions.reLogin(token.token.user))
+    }
+  })
+
+
   return (
     <BrowserRouter>
       <Layout>
