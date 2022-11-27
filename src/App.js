@@ -18,20 +18,21 @@ import MyHotels from "./pages/MyHotels";
 import HotelEdit from "./pages/HotelEdit";
 import MyShows from "./pages/MyShows";
 import ShowEdit from "./pages/ShowEdit";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import userActions from "./redux/actions/userActions";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
+  let { logged, role } = useSelector((store) => store.userReducer);
+
   useEffect(() => {
-    let token = JSON.parse(localStorage.getItem("token"))
+    let token = JSON.parse(localStorage.getItem("token"));
     if (token) {
-      dispatch(userActions.reLogin(token.token.user))
+      dispatch(userActions.reLogin(token.token.user));
     }
-  })
+  }, []);
 
   return (
     <BrowserRouter>
@@ -44,17 +45,18 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/details/:type/:id" element={<DetailsCard />} />
-          <Route path="/newcity" element={<NewCity />} />
-          <Route path="/newhotel" element={<NewHotel />} />
-          <Route path="/cities/:userId" element={<MyCities />} />
-          <Route path="/cities/edit/:id" element={<CityEdit />} />
-          <Route path="/itinerary/:userId" element={<MyTineraries />} />
-          <Route path="/itinerary/edit/:id" element={<ItineraryEdit />} />
-          <Route path="/hotels/:userId" element={<MyHotels />} />
-          <Route path="/hotels/edit/:id" element={<HotelEdit />} />
-          <Route path="/shows/:userId" element={<MyShows />} />
-          <Route path="/shows/edit/:id" element={<ShowEdit />} />
-
+          <Route element={<ProtectedRoute isAllowed={logged} reDirect={"/"}/>}>
+            <Route path="/newcity" element={<NewCity />} />
+            <Route path="/newhotel" element={<NewHotel />} />
+            <Route path="/cities/:userId" element={<MyCities />} />
+            <Route path="/cities/edit/:id" element={<CityEdit />} />
+            <Route path="/itinerary/:userId" element={<MyTineraries />} />
+            <Route path="/itinerary/edit/:id" element={<ItineraryEdit />} />
+            <Route path="/hotels/:userId" element={<MyHotels />} />
+            <Route path="/hotels/edit/:id" element={<HotelEdit />} />
+            <Route path="/shows/:userId" element={<MyShows />} />
+            <Route path="/shows/edit/:id" element={<ShowEdit />} />
+          </Route>
         </Routes>
       </Layout>
     </BrowserRouter>
