@@ -1,45 +1,14 @@
 import React from "react";
-import { useRef } from "react";
 import GoogleButton from "../components/GoogleButton";
 import InputFormSign from "../components/InputFormSign";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import userActions from "../redux/actions/userActions";
-import Swal from "sweetalert2";
 
 export default function SignIn() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const email = useRef(null);
-  const pass = useRef(null);
-
-  let handleSubmit = async (event) => {
-    event.preventDefault();
-    let user = {
-      email: email.current.value,
-      password: pass.current.value,
+  let handleSubmit = () => {
+    let profile = {
+      user: document.getElementById("user").value,
+      password: document.getElementById("pass").value,
     };
-    try {
-      const res = await dispatch(userActions.login(user));
-      console.log(res)
-      if (res.payload.success) {
-        Swal.fire(res.payload.data.message, "You are being redirected", "success").then(
-          (result) => {
-            if (result.isConfirmed) navigate("/");
-          }
-        );
-      } else {
-        Swal.fire(
-          "Error!",
-          Array.isArray(res.payload.response)
-            ? res.payload.response.join("<br>")
-            : res.payload.response,
-          "error"
-        );
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    localStorage.setItem("signIn", JSON.stringify(profile));
   };
 
   return (
@@ -50,16 +19,12 @@ export default function SignIn() {
           <div className="content">
             <form onSubmit={handleSubmit}>
               <div className="user-details">
-                <InputFormSign
-                  type="text"
-                  reference={email}
-                  text="Enter your email"
-                >
-                  Email
+                <InputFormSign type="text" id="user" text="Enter your username">
+                  Username
                 </InputFormSign>
                 <InputFormSign
                   type="password"
-                  reference={pass}
+                  id="pass"
                   text="Enter your password"
                 >
                   Password
