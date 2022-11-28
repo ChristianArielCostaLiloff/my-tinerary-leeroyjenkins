@@ -74,46 +74,52 @@ export default function NavBar() {
           )}
           {logged && (
             <>
-              <li>
-                <p className="menu--horizontal-element">Admin</p>
-                <ul className="menu--vertical">
-                  <li>
-                    <CallToAction
-                      path="/newcity"
-                      style="menu--vertical-element"
-                    >
-                      New City
-                    </CallToAction>
-                  </li>
-                  <li>
-                    <CallToAction
-                      path="/newhotel"
-                      style="menu--vertical-element"
-                    >
-                      New Hotel
-                    </CallToAction>
-                  </li>
-                </ul>
-              </li>
+              {
+                role === "admin" &&
+                <li>
+                  <p className="menu--horizontal-element">Admin</p>
+                  <ul className="menu--vertical">
+                    <li>
+                      <CallToAction
+                        path="/newcity"
+                        style="menu--vertical-element"
+                      >
+                        New City
+                      </CallToAction>
+                    </li>
+                    <li>
+                      <CallToAction
+                        path="/newhotel"
+                        style="menu--vertical-element"
+                      >
+                        New Hotel
+                      </CallToAction>
+                    </li>
+                  </ul>
+                </li>
+              }
               <li>
                 <p className="menu--horizontal-element">Edit</p>
                 <ul className="menu--vertical">
-                  <li>
-                    <CallToAction
-                      path="/cities/6370096b26cecde13c02e04c"
-                      style="menu--vertical-element"
-                    >
-                      City
-                    </CallToAction>
-                  </li>
-                  <li>
-                    <CallToAction
-                      path="/hotels/6370096b26cecde13c02e04c"
-                      style="menu--vertical-element"
-                    >
-                      Hotel
-                    </CallToAction>
-                  </li>
+                  {
+                    role === "admin" && <>
+                      <li>
+                        <CallToAction
+                          path="/cities/6370096b26cecde13c02e04c"
+                          style="menu--vertical-element"
+                        >
+                          City
+                        </CallToAction>
+                      </li>
+                      <li>
+                        <CallToAction
+                          path="/hotels/6370096b26cecde13c02e04c"
+                          style="menu--vertical-element"
+                        >
+                          Hotel
+                        </CallToAction>
+                      </li>
+                    </>}
                   <li>
                     <CallToAction
                       path="/itinerary/6370096b26cecde13c02e04c"
