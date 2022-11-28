@@ -12,10 +12,10 @@ const login = createAsyncThunk("login", async (data) => {
         data: user.data,
       };
     } else {
-    return {
-      success: false,
-      response: user .data.message,
-    };
+      return {
+        success: false,
+        response: user.data.message,
+      };
     }
   } catch (error) {
     return {
