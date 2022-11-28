@@ -45,17 +45,19 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/details/:type/:id" element={<DetailsCard />} />
-          <Route element={<ProtectedRoute isAllowed={logged} reDirect={"/"}/>}>
+          <Route element={<ProtectedRoute isAllowed={logged} reDirect={"/"} />}>
+            <Route path="/shows/:userId" element={<MyShows />} />
+            <Route path="/shows/edit/:id" element={<ShowEdit />} />
+            <Route path="/itinerary/:userId" element={<MyTineraries />} />
+            <Route path="/itinerary/edit/:id" element={<ItineraryEdit />} />
+          </Route>
+          <Route element={<ProtectedRoute isAllowed={logged && role === "admin"} reDirect={"/"} />}>
             <Route path="/newcity" element={<NewCity />} />
             <Route path="/newhotel" element={<NewHotel />} />
             <Route path="/cities/:userId" element={<MyCities />} />
             <Route path="/cities/edit/:id" element={<CityEdit />} />
-            <Route path="/itinerary/:userId" element={<MyTineraries />} />
-            <Route path="/itinerary/edit/:id" element={<ItineraryEdit />} />
             <Route path="/hotels/:userId" element={<MyHotels />} />
             <Route path="/hotels/edit/:id" element={<HotelEdit />} />
-            <Route path="/shows/:userId" element={<MyShows />} />
-            <Route path="/shows/edit/:id" element={<ShowEdit />} />
           </Route>
         </Routes>
       </Layout>
