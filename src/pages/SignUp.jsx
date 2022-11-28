@@ -25,7 +25,6 @@ export default function SingUp() {
       email: email.current.value,
       password: password.current.value,
     };
-    console.log(profile);
     if (profile.password !== passwordConfirmation.current.value) {
       Swal.fire("Warning!", "Your password doesn't match", "error");
     } else {

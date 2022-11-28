@@ -24,6 +24,7 @@ const userReducer = createReducer(initialState, (builder) => {
         );
         return {
           ...state,
+          _id: user._id,
           name: user.name,
           email: user.email,
           photo: user.photo,
@@ -43,6 +44,7 @@ const userReducer = createReducer(initialState, (builder) => {
         let { user, token } = action.payload.response;
         return {
           ...state,
+          _id: user._id,
           name: user.name,
           email: user.email,
           photo: user.photo,

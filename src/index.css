@@ -937,7 +937,7 @@ form .button input:hover {
   gap: 10px;
 }
 
-select {
+.sele {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -954,7 +954,7 @@ select {
   font-size: 1em;
 }
 
-select::-ms-expand {
+.sele::-ms-expand {
   display: none;
 }
 
@@ -1360,4 +1360,56 @@ select::-ms-expand {
 
 .new-hotel {
   background-image: url("/public/img/background-newhotel.jpg");
+}
+/* ---btn-it-shw--- */
+.content-form{
+  width: 100%;
+  min-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.button {
+  margin: 20px;
+  outline: none;
+}
+.custom-btn {
+  width: 150px;
+  height: 40px;
+  padding: 10px 25px;
+  border: 2px solid #006466;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  color: #212f45;
+}
+.btn-2:after {
+  position: absolute;
+  content: "";
+  top: 5px;
+  left: 6px;
+  width: 90%;
+  height: 70%;
+  border: 1px solid #006466;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.btn-2:hover:after {
+  opacity: 1;
+}
+.select-new{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
 }
