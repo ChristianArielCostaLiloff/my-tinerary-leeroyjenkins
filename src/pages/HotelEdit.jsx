@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputFormSign from "../components/InputFormSign";
@@ -15,6 +16,7 @@ export default function HotelEdit() {
   const capacity = useRef(null);
   const { id } = useParams();
   let [hotelDb, setHotelDb] = useState([]);
+  const { token } = useSelector((store) => store.userReducer);
 
   useEffect(() => {
     axios
@@ -31,7 +33,10 @@ export default function HotelEdit() {
       cityId: "63701f25d10c25267b79e291",
       userId: "6370096b26cecde13c02e04c",
     };
-    const res = await axios.patch(`${apiUrl}/api/hotel/${id}`, hotel);
+
+    let headers = { headers: { Authorization: `Bearer ${token}`}}
+    const res = await axios.patch(`${apiUrl}/api/hotel/${id}`, hotel, headers);
+
     if (res.data.success) {
       Swal.fire("Success!", "Your hotel has been updated", "success").then(
         (result) => {
