@@ -1,18 +1,21 @@
 import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import Event from "../components/Event";
 import NoElementsFound from "../components/NoElementsFound";
 import itineraryActions from "../redux/actions/itineraryActions";
 import apiUrl from "../url";
+import NewItinerary from "./NewItinerary";
 
 export default function MyTineraries() {
   const { userId } = useParams();
   let [itinerary, setItinerary] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  let { _id } = useSelector((store) => store.userReducer);
 
   useEffect(() => {
     axios
@@ -34,18 +37,19 @@ export default function MyTineraries() {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(itineraryActions.deleteItinerary(id)).then(
-          window.location.reload(true)
+          navigate(`/itinerary`)
         );
       }
     });
   };
 
   const handleClickEdit = (id) => {
-    window.location.href = `/itinerary/edit/${id}`;
+    navigate(`/itinerary/edit/${id}`);
   };
 
   return (
     <div className="base-cities">
+      <NewItinerary key={"formItinerary"} />
       <div className="card-container" id="container-card">
         {itinerary.length > 0 ? (
           itinerary.map((e) => (
@@ -57,7 +61,7 @@ export default function MyTineraries() {
             />
           ))
         ) : (
-          <NoElementsFound />
+          <NoElementsFound key={"NoElements"} />
         )}
       </div>
     </div>
