@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import apiUrl from "../url";
 import Card from "../components/Card";
 import NoElementsFound from "../components/NoElementsFound";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import hotelActions from "../redux/actions/hotelActions";
 import Swal from "sweetalert2";
 
@@ -14,7 +14,8 @@ export default function MyHotels() {
   const { userId } = useParams();
   let [hotels, setHotels] = useState([]);
   const dispatch = useDispatch();
-
+  const { token } = useSelector((store) => store.userReducer);
+  
   useEffect(() => {
     axios
       .get(`${apiUrl}/api/hotel?userId=${userId}`)
@@ -25,6 +26,10 @@ export default function MyHotels() {
   }, []);
 
   const handleClickDelete = (id) => {
+    let data = {
+      token: token,
+      cityId: id,
+    }
     Swal.fire({
       title: "Do you want delete this hotel?",
       icon: "warning",
@@ -34,7 +39,7 @@ export default function MyHotels() {
       confirmButtonText: "Delete hotel",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(hotelActions.deleteHotel(id)).then(navigate(0));
+        dispatch(hotelActions.deleteHotel(data)).then(navigate(0));
       }
     });
   };
