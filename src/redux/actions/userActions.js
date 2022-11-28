@@ -12,10 +12,10 @@ const login = createAsyncThunk("login", async (data) => {
         data: user.data,
       };
     } else {
-    return {
-      success: false,
-      response: user .data.message,
-    };
+      return {
+        success: false,
+        response: user.data.message,
+      };
     }
   } catch (error) {
     return {
@@ -28,11 +28,7 @@ const login = createAsyncThunk("login", async (data) => {
 const reLogin = createAsyncThunk("reLogin", async (token) => {
   let headers = { headers: { Authorization: `Bearer ${token}` } };
   try {
-    let user = await axios.post(
-      `${apiUrl}/api/auth/token`,
-      null,
-      headers
-    );
+    let user = await axios.post(`${apiUrl}/api/auth/token`, null, headers);
     return {
       success: true,
       response: {
@@ -48,9 +44,30 @@ const reLogin = createAsyncThunk("reLogin", async (token) => {
   }
 });
 
+const logOut = createAsyncThunk("logOut", async (token) => {
+  let headers = { headers: { Authorization: `Bearer ${token}` } };
+  try {
+    let user = await axios.post(`${apiUrl}/api/auth/signout`, null, headers);
+    console.log(user);
+    return {
+      success: true,
+      response: {
+        user: user.data.message,
+        token,
+      },
+    };
+  } catch (error) {
+    return {
+      success: false,
+      response: error.response.data.message,
+    };
+  }
+});
+
 const userActions = {
   login,
   reLogin,
+  logOut,
 };
 
 export default userActions;
