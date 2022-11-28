@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import apiUrl from "../url";
 import Card from "../components/Card";
 import NoElementsFound from "../components/NoElementsFound";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import cityActions from "../redux/actions/cityActions";
 import Swal from "sweetalert2";
 
@@ -14,6 +14,7 @@ export default function MyCities() {
   const { userId } = useParams();
   let [cities, setCities] = useState([]);
   const dispatch = useDispatch();
+  const { token } = useSelector((store) => store.userReducer);
 
   useEffect(() => {
     axios
@@ -25,6 +26,10 @@ export default function MyCities() {
   }, []);
 
   const handleClickDelete = (id) => {
+    let data = {
+      token: token,
+      cityId: id,
+    }
     Swal.fire({
       title: "Do you want delete this city?",
       icon: "warning",
@@ -34,7 +39,7 @@ export default function MyCities() {
       confirmButtonText: "Delete city",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(cityActions.deleteCity(id)).then(navigate(0));
+        dispatch(cityActions.deleteCity(data)).then(navigate(0));
       }
     });
   };

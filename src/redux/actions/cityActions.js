@@ -27,8 +27,10 @@ const getCitiesByNameAndContinent = createAsyncThunk(
   }
 );
 
-const deleteCity = createAsyncThunk("deleteCity", async (cityId) => {
-  const res = await axios.delete(`${apiUrl}/api/city/${cityId}`);
+const deleteCity = createAsyncThunk("deleteCity", async (data) => {
+  let { token, cityId } = data;    
+  let headers = { headers: { Authorization: `Bearer ${token}`}}
+  const res = await axios.delete(`${apiUrl}/api/city/${cityId}`, headers);
   return { cityId: res.data.cityId };
 });
 
