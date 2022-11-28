@@ -8,6 +8,7 @@ import Event from "../components/Event";
 import NoElementsFound from "../components/NoElementsFound";
 import showActions from "../redux/actions/showActions";
 import apiUrl from "../url";
+import NewShow from "./NewShow";
 
 export default function MyShows() {
   const { userId } = useParams();
@@ -45,6 +46,7 @@ export default function MyShows() {
 
   return (
     <div className="base-cities">
+      <NewShow/>
       <div className="card-container" id="container-card">
         {show.length > 0 ? (
           show.map((e) => (
