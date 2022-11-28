@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputFormSign from "../components/InputFormSign";
@@ -16,6 +17,7 @@ export default function CityEdit() {
   const population = useRef(null);
   const { id } = useParams();
   let [cityDb, setCityDb] = useState([]);
+  let { _id , token} = useSelector(store=>store.userReducer)
 
   useEffect(() => {
     axios
@@ -30,9 +32,10 @@ export default function CityEdit() {
       continent: continent.current.value,
       photo: photo.current.value,
       population: population.current.value,
-      userId: "6370096b26cecde13c02e04c",
+      userId: _id,
     };
-    const res = await axios.put(`${apiUrl}/api/city/${id}`, city);
+    let headers = { headers: { Authorization: `Bearer ${token}`}}
+    const res = await axios.put(`${apiUrl}/api/city/${id}`, city, headers);
     if (res.data.success) {
       Swal.fire("Success!", "Your city has been updated", "success").then(
         (result) => {

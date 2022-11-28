@@ -106,7 +106,7 @@ export default function NavBar() {
                     role === "admin" && <>
                       <li>
                         <CallToAction
-                          path="/cities/6370096b26cecde13c02e04c"
+                          path={`/cities/${_id}`}
                           style="menu--vertical-element"
                         >
                           City
