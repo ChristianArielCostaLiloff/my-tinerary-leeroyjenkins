@@ -1,9 +1,33 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import userActions from "../redux/actions/userActions";
 import CallToAction from "./CallToAction";
 
 export default function NavBar() {
-  let { logged, role } = useSelector((store) => store.userReducer);
+  let { name, photo, logged, role, token } = useSelector((store) => store.userReducer);
+  let [active, setActive] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleActive = () => {
+    setActive(!active);
+  };
+
+  const handleClick = ()=>{
+    Swal.fire({
+      title: "Do you want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FF4C4C",
+      cancelButtonColor: "#A4a4a4",
+      confirmButtonText: "Log Out",
+    }).then((result) => {
+      if(result.isConfirmed){
+        dispatch(userActions.logOut(token))
+        console.log("pete")
+      }
+    });
+  }
   return (
     <nav>
       <div className="nav">
@@ -178,6 +202,30 @@ export default function NavBar() {
           </li>
         </ul>
       </div>
+      {logged && (
+        <div className="action">
+          <div className="profile" onClick={handleActive}>
+            <img src={photo} alt="user photo" />
+          </div>
+          <div className={active ? "menu active" : "menu"}>
+            <h3>
+              {name}
+              <br />
+              <span>{role}</span>
+            </h3>
+            <ul>
+              <li>
+                <img src="/img/edit.png" alt="edit" />
+                <div path="#">Edit profile</div>
+              </li>
+              <li>
+                <img src="/img/log-out.png" alt="logout" />
+                <div onClick={handleClick}>Logout</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
