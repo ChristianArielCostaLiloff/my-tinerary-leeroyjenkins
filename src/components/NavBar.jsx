@@ -131,7 +131,7 @@ export default function NavBar() {
                   </li>
                   <li>
                     <CallToAction
-                      path="/shows/6370096b26cecde13c02e04c"
+                      path={`/shows/${_id}`}
                       style="menu--vertical-element"
                     >
                       Show
