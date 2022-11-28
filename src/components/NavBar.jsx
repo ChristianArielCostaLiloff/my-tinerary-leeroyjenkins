@@ -8,6 +8,7 @@ export default function NavBar() {
   let { name, photo, logged, role, token } = useSelector((store) => store.userReducer);
   let [active, setActive] = useState(false);
   const dispatch = useDispatch();
+  let { _id } = useSelector((store) => store.userReducer);
 
   const handleActive = () => {
     setActive(!active);
@@ -122,7 +123,7 @@ export default function NavBar() {
                     </>}
                   <li>
                     <CallToAction
-                      path="/itinerary/6370096b26cecde13c02e04c"
+                      path={`/itinerary/${_id}`}
                       style="menu--vertical-element"
                     >
                       Itinerary
