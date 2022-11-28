@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import userActions from "./redux/actions/userActions";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./pages/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ function App() {
             <Route path="/shows/edit/:id" element={<ShowEdit />} />
             <Route path="/itinerary/:userId" element={<MyTineraries />} />
             <Route path="/itinerary/edit/:id" element={<ItineraryEdit />} />
+            <Route path="/profile" element={<Profile/>}/>
           </Route>
           <Route element={<ProtectedRoute isAllowed={logged && role === "admin"} reDirect={"/"} />}>
             <Route path="/newcity" element={<NewCity />} />

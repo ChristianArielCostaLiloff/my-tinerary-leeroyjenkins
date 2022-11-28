@@ -23,7 +23,7 @@ export default function ItineraryEdit() {
       .get(`${apiUrl}/api/itinerary/${id}`)
       .then((res) => setitineraryDb(res.data.response))
       .catch((error) => console.log(error));
-  });
+  },[]);
 
   const handleClick = async () => {
     let itinerary = {

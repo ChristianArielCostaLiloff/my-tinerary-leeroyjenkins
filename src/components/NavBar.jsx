@@ -217,7 +217,7 @@ export default function NavBar() {
             <ul>
               <li>
                 <img src="/img/edit.png" alt="edit" />
-                <div path="#">Edit profile</div>
+                <CallToAction path="/profile">Edit profile</CallToAction>
               </li>
               <li>
                 <img src="/img/log-out.png" alt="logout" />
