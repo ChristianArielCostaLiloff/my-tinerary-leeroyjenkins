@@ -21,7 +21,6 @@ export default function SignIn() {
     };
     try {
       const res = await dispatch(userActions.login(user));
-      console.log(res)
       if (res.payload.success) {
         Swal.fire(res.payload.data.message, "You are being redirected", "success").then(
           (result) => {
