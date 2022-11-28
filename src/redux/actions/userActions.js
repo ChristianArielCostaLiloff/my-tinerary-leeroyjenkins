@@ -28,8 +28,11 @@ const login = createAsyncThunk("login", async (data) => {
 const reLogin = createAsyncThunk("reLogin", async (token) => {
   let headers = { headers: { Authorization: `Bearer ${token}` } };
   try {
-    let user = await axios.post(`${apiUrl}/api/auth/token`, null, headers);
-    console.log(user);
+    let user = await axios.post(
+      `${apiUrl}/api/auth/token`,
+      null,
+      headers
+    );
     return {
       success: true,
       response: {
