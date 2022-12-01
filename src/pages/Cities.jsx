@@ -19,6 +19,7 @@ export default function Cities() {
     } else {
       dispatch(cityActions.getCitiesByNameAndContinent(filter));
     }
+    // eslint-disable-next-line
   }, []);
 
   const handleChange = () => {

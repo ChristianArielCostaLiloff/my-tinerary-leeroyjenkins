@@ -1,63 +1,33 @@
-import axios from "axios";
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import Swal from "sweetalert2";
+import { useParams } from "react-router-dom";
 import Event from "../components/Event";
 import NoElementsFound from "../components/NoElementsFound";
 import itineraryActions from "../redux/actions/itineraryActions";
-import apiUrl from "../url";
 import NewItinerary from "./NewItinerary";
 
 export default function MyTineraries() {
   const { userId } = useParams();
-  let [itinerary, setItinerary] = useState([]);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  let { _id } = useSelector((store) => store.userReducer);
+  let { itineraries } = useSelector((store) => store.itineraryReducer);
 
   useEffect(() => {
-    axios
-      .get(`${apiUrl}/api/itinerary?userId=${userId}`)
-      .then((res) => {
-        setItinerary(res.data.response);
-      })
-      .catch((error) => console.log(error));
+    dispatch(itineraryActions.getItinerary(userId));
+    // eslint-disable-next-line
   }, []);
-
-  const handleClickDelete = (id) => {
-    Swal.fire({
-      title: "Do you want delete this itinerary?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#FF4C4C",
-      cancelButtonColor: "#A4a4a4",
-      confirmButtonText: "Delete itinerary",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(itineraryActions.deleteItinerary(id)).then(
-          navigate(`/itinerary`)
-        );
-      }
-    });
-  };
-
-  const handleClickEdit = (id) => {
-    navigate(`/itinerary/edit/${id}`);
-  };
 
   return (
     <div className="base-cities">
       <NewItinerary key={"formItinerary"} />
       <div className="card-container" id="container-card">
-        {itinerary.length > 0 ? (
-          itinerary.map((e) => (
+        {itineraries.length > 0 ? (
+          itineraries.map((e) => (
             <Event
-              key={e.id}
+              key={e._id}
               event={e}
               editMode={true}
-              handlers={{ handleClickDelete, handleClickEdit }}
+              eventType={"itinerary"}
             />
           ))
         ) : (

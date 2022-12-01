@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import InputFormSign from "../components/InputFormSign";
+import showActions from "../redux/actions/showActions";
 import apiUrl from "../url";
 
 export default function NewShow() {
@@ -15,11 +15,13 @@ export default function NewShow() {
   const hotel = useRef(null);
   let [viewForm, setViewForm] = useState(false);
   let [hotels, setHotels] = useState([]);
-  let { _id } = useSelector((store) => store.userReducer);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get(`${apiUrl}/api/hotel`).then((res) => setHotels(res.data.response));
+    axios
+      .get(`${apiUrl}/api/hotel`)
+      .then((res) => setHotels(res.data.response));
+    // eslint-disable-next-line
   }, []);
 
   const showForm = () => {
@@ -35,16 +37,12 @@ export default function NewShow() {
       description: description.current.value,
       price: price.current.value,
       date: date.current.value,
-      userId: _id,
     };
-    await axios.post(`${apiUrl}/api/show`, newShow).then(() => {
-      Swal.fire("Success", "Show Created", "success").then((result) => {
-        if (result.isConfirmed) {
-          navigate(`/shows/${_id}`)
-        }
-      });
-    });
+    dispatch(showActions.postShow(newShow)).then(
+      Swal.fire("Success", "Show Created", "success")
+    );
   };
+
   return (
     <div className="content-form">
       <button className="button custom-btn btn-2" onClick={showForm}>

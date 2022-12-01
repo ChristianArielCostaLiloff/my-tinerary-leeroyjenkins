@@ -1,8 +1,12 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { cities } from "../../data/cities";
 import cityActions from "../actions/cityActions";
 
-const { getCities, getCitiesByNameAndContinent, deleteCity } = cityActions;
+const {
+  getCities,
+  getCitiesByUserId,
+  getCitiesByNameAndContinent,
+  deleteCity,
+} = cityActions;
 
 const initialState = {
   cities: [],
@@ -11,6 +15,7 @@ const initialState = {
     name: "",
     continent: [],
   },
+  citiesByUserId: [],
 };
 
 const cityReducer = createReducer(initialState, (builder) => {
@@ -19,6 +24,13 @@ const cityReducer = createReducer(initialState, (builder) => {
       ...state,
       cities: action.payload.cities,
       continent: action.payload.continent,
+    };
+  });
+
+  builder.addCase(getCitiesByUserId.fulfilled, (state, action) => {
+    return {
+      ...state,
+      citiesByUserId: action.payload.citiesByUserId,
     };
   });
 
@@ -33,7 +45,9 @@ const cityReducer = createReducer(initialState, (builder) => {
   builder.addCase(deleteCity.fulfilled, (state, action) => {
     return {
       ...state,
-      cities: state.cities.filter((city) => city._id !== action.payload.cityId),
+      citiesByUserId: state.citiesByUserId.filter(
+        (city) => city._id !== action.payload.cityId._id
+      ),
     };
   });
 });

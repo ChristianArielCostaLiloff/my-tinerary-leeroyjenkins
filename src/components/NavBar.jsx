@@ -5,7 +5,9 @@ import userActions from "../redux/actions/userActions";
 import CallToAction from "./CallToAction";
 
 export default function NavBar() {
-  let { name, photo, logged, role, token } = useSelector((store) => store.userReducer);
+  let { name, photo, logged, role, token } = useSelector(
+    (store) => store.userReducer
+  );
   let [active, setActive] = useState(false);
   const dispatch = useDispatch();
   let { _id } = useSelector((store) => store.userReducer);
@@ -14,7 +16,7 @@ export default function NavBar() {
     setActive(!active);
   };
 
-  const handleClick = ()=>{
+  const handleClick = () => {
     Swal.fire({
       title: "Do you want to log out?",
       icon: "warning",
@@ -23,12 +25,11 @@ export default function NavBar() {
       cancelButtonColor: "#A4a4a4",
       confirmButtonText: "Log Out",
     }).then((result) => {
-      if(result.isConfirmed){
-        dispatch(userActions.logOut(token))
-        console.log("pete")
+      if (result.isConfirmed) {
+        dispatch(userActions.logOut(token));
       }
     });
-  }
+  };
   return (
     <nav>
       <div className="nav">
@@ -75,8 +76,7 @@ export default function NavBar() {
           )}
           {logged && (
             <>
-              {
-                role === "admin" &&
+              {role === "admin" && (
                 <li>
                   <p className="menu--horizontal-element">Admin</p>
                   <ul className="menu--vertical">
@@ -98,12 +98,12 @@ export default function NavBar() {
                     </li>
                   </ul>
                 </li>
-              }
+              )}
               <li>
                 <p className="menu--horizontal-element">Edit</p>
                 <ul className="menu--vertical">
-                  {
-                    role === "admin" && <>
+                  {role === "admin" && (
+                    <>
                       <li>
                         <CallToAction
                           path={`/cities/${_id}`}
@@ -114,13 +114,14 @@ export default function NavBar() {
                       </li>
                       <li>
                         <CallToAction
-                          path="/hotels/6370096b26cecde13c02e04c"
+                          path={`/hotels/${_id}`}
                           style="menu--vertical-element"
                         >
                           Hotel
                         </CallToAction>
                       </li>
-                    </>}
+                    </>
+                  )}
                   <li>
                     <CallToAction
                       path={`/itinerary/${_id}`}
@@ -131,7 +132,7 @@ export default function NavBar() {
                   </li>
                   <li>
                     <CallToAction
-                      path={`/shows/${_id}`}
+                      path={`/show/${_id}`}
                       style="menu--vertical-element"
                     >
                       Show
@@ -164,49 +165,54 @@ export default function NavBar() {
               Hotels
             </CallToAction>
           </li>
-          <li>
-            <CallToAction path="/signin" style="menu__item">
-              Sign in
-            </CallToAction>
-          </li>
-          <li>
-            <CallToAction
-              path="/cities/6370096b26cecde13c02e04c"
-              style="menu__item"
-            >
-              Edit City
-            </CallToAction>
-          </li>
-          <li>
-            <CallToAction
-              path="/itinerary/6370096b26cecde13c02e04c"
-              style="menu__item"
-            >
-              Edit Itinerary
-            </CallToAction>
-          </li>
-          <li>
-            <CallToAction
-              path="/hotels/6370096b26cecde13c02e04c"
-              style="menu__item"
-            >
-              Edit Hotel
-            </CallToAction>
-          </li>
-          <li>
-            <CallToAction
-              path="/shows/6370096b26cecde13c02e04c"
-              style="menu__item"
-            >
-              Edit Show
-            </CallToAction>
-          </li>
+          {!logged && (
+            <>
+              <li>
+                <CallToAction path="/signin" style="menu__item">
+                  Sign in
+                </CallToAction>
+              </li>
+              <li>
+                <CallToAction path="/signup" style="menu__item">
+                  Sign up
+                </CallToAction>
+              </li>
+            </>
+          )}
+          {logged && (
+            <>
+              {role === "admin" && (
+                <>
+                  <li>
+                    <CallToAction path={`/cities/${_id}`} style="menu__item">
+                      Edit City
+                    </CallToAction>
+                  </li>
+                  <li>
+                    <CallToAction path={`/hotels/${_id}`} style="menu__item">
+                      Edit Hotel
+                    </CallToAction>
+                  </li>
+                </>
+              )}
+              <li>
+                <CallToAction path={`/itinerary/${_id}`} style="menu__item">
+                  Edit Itinerary
+                </CallToAction>
+              </li>
+              <li>
+                <CallToAction path={`/show/${_id}`} style="menu__item">
+                  Edit Show
+                </CallToAction>
+              </li>
+            </>
+          )}
         </ul>
       </div>
       {logged && (
         <div className="action">
           <div className="profile" onClick={handleActive}>
-            <img src={photo} alt="user photo" />
+            <img src={photo} alt="user" />
           </div>
           <div className={active ? "menu active" : "menu"}>
             <h3>

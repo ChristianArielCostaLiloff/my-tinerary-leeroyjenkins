@@ -1,8 +1,6 @@
-import axios from "axios";
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import apiUrl from "../url";
 import Card from "../components/Card";
 import NoElementsFound from "../components/NoElementsFound";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,24 +10,15 @@ import Swal from "sweetalert2";
 export default function MyHotels() {
   const navigate = useNavigate();
   const { userId } = useParams();
-  let [hotels, setHotels] = useState([]);
+  let { hotelsByUserId } = useSelector((store) => store.hotelReducer);
   const dispatch = useDispatch();
-  const { token } = useSelector((store) => store.userReducer);
-  
+
   useEffect(() => {
-    axios
-      .get(`${apiUrl}/api/hotel?userId=${userId}`)
-      .then((res) => {
-        setHotels(res.data.response);
-      })
-      .catch((error) => console.log(error));
+    dispatch(hotelActions.getHotelsByUserId(userId));
+    // eslint-disable-next-line
   }, []);
 
-  const handleClickDelete = (id) => {
-    let data = {
-      token: token,
-      cityId: id,
-    }
+  const handleClickDelete = (hotelId) => {
     Swal.fire({
       title: "Do you want delete this hotel?",
       icon: "warning",
@@ -39,7 +28,7 @@ export default function MyHotels() {
       confirmButtonText: "Delete hotel",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(hotelActions.deleteHotel(data)).then(navigate(0));
+        dispatch(hotelActions.deleteHotel(hotelId));
       }
     });
   };
@@ -51,8 +40,8 @@ export default function MyHotels() {
   return (
     <div className="base-cities">
       <div className="card-container" id="container-card">
-        {hotels.length > 0 ? (
-          hotels.map((hotel) => (
+        {hotelsByUserId.length > 0 ? (
+          hotelsByUserId.map((hotel) => (
             <Card
               type="hotel"
               element={hotel}

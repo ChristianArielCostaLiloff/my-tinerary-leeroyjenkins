@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import InputFormSign from "../components/InputFormSign";
+import itineraryActions from "../redux/actions/itineraryActions";
 import apiUrl from "../url";
 
 export default function NewItinerary() {
@@ -15,11 +15,11 @@ export default function NewItinerary() {
   const city = useRef(null);
   let [viewForm, setViewForm] = useState(false);
   let [cities, setCities] = useState([]);
-  let { _id } = useSelector((store) => store.userReducer);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios.get(`${apiUrl}/api/city`).then((res) => setCities(res.data.response));
+    //eslint-disable-next-line
   }, []);
 
   const showForm = () => {
@@ -35,16 +35,12 @@ export default function NewItinerary() {
       description: description.current.value,
       price: price.current.value,
       duration: duration.current.value,
-      userId: _id,
     };
-    await axios.post(`${apiUrl}/api/itinerary`, newItinerary).then(() => {
-      Swal.fire("Success", "Itinerary Created", "success").then((result) => {
-        if (result.isConfirmed) {
-          navigate(`/itinerary/${_id}`)
-        }
-      });
-    });
+    dispatch(itineraryActions.postItinerary(newItinerary)).then(
+      Swal.fire("Success", "Itinerary Created", "success")
+    );
   };
+
   return (
     <div className="content-form">
       <button className="button custom-btn btn-2" onClick={showForm}>
@@ -77,15 +73,14 @@ export default function NewItinerary() {
                     <option defaultValue> Select city </option>
                     {cities.map((city) => (
                       <option value={city._id} key={city._id}>
-                        {" "}
-                        {city.name}{" "}
+                        {city.name}
                       </option>
                     ))}
                   </select>
                 </div>
               </div>
               <div className="button">
-                <input type="submit" value="Update city" />
+                <input type="submit" value="New Itinerary" />
               </div>
             </form>
           </div>
