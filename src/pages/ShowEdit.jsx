@@ -23,19 +23,20 @@ export default function ShowEdit() {
       .get(`${apiUrl}/api/show/${id}`)
       .then((res) => setShowDb(res.data.response))
       .catch((error) => console.log(error));
-  });
+    // eslint-disable-next-line
+  }, []);
 
   const handleClick = async () => {
-    console.log(new Date(date.current.value));
     let show = {
       name: name.current.value,
       description: description.current.value,
       photo: photo.current.value,
       price: price.current.value,
       date: new Date(date.current.value),
-      userId: "6370096b26cecde13c02e04c",
     };
-    const res = await axios.patch(`${apiUrl}/api/show/${id}`, show);
+    let token = JSON.parse(localStorage.getItem("token"));
+    let headers = { headers: { Authorization: `Bearer ${token.token.user}` } };
+    const res = await axios.patch(`${apiUrl}/api/show/${id}`, show, headers);
     if (res.data.success) {
       Swal.fire("Success!", "Your show has been updated", "success").then(
         (result) => {

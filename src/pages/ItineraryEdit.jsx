@@ -23,18 +23,24 @@ export default function ItineraryEdit() {
       .get(`${apiUrl}/api/itinerary/${id}`)
       .then((res) => setitineraryDb(res.data.response))
       .catch((error) => console.log(error));
-  });
+    // eslint-disable-next-line
+  }, []);
 
   const handleClick = async () => {
     let itinerary = {
       name: name.current.value,
       description: description.current.value,
-      photo: photo.current.value.split(","),
+      photo: photo.current.value,
       price: price.current.value,
       duration: duration.current.value,
-      userId: "6370096b26cecde13c02e04c",
     };
-    const res = await axios.put(`${apiUrl}/api/itinerary/${id}`, itinerary);
+    let token = JSON.parse(localStorage.getItem("token"));
+    let headers = { headers: { Authorization: `Bearer ${token.token.user}` } };
+    const res = await axios.put(
+      `${apiUrl}/api/itinerary/${id}`,
+      itinerary,
+      headers
+    );
     if (res.data.success) {
       Swal.fire("Success!", "Your itinerary has been updated", "success").then(
         (result) => {

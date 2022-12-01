@@ -35,7 +35,7 @@ export default function Hotels() {
         <div className="cities-nav" id="hotels-nav">
           <form className="nav_form" onChange={handleChange}>
             <div className="select">
-              <select ref={select} name="format" id="format">
+              <select ref={select} name="format" id="format" className='sele'>
                 <option defaultValue value=''>Order by capacity</option>
                 <option value="desc">From high to low</option>
                 <option value="asc">From low to high</option>

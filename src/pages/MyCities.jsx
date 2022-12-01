@@ -1,29 +1,24 @@
-import axios from "axios";
 import React from "react";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import apiUrl from "../url";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Card from "../components/Card";
 import NoElementsFound from "../components/NoElementsFound";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import cityActions from "../redux/actions/cityActions";
 import Swal from "sweetalert2";
 
 export default function MyCities() {
+  const navigate = useNavigate();
   const { userId } = useParams();
-  let [cities, setCities] = useState([]);
+  let { citiesByUserId } = useSelector((store) => store.cityReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get(`${apiUrl}/api/city?userId=${userId}`)
-      .then((res) => {
-        setCities(res.data.response);
-      })
-      .catch((error) => console.log(error));
+    dispatch(cityActions.getCitiesByUserId(userId));
+    // eslint-disable-next-line
   }, []);
 
-  const handleClickDelete = (id) => {
+  const handleClickDelete = (cityId) => {
     Swal.fire({
       title: "Do you want delete this city?",
       icon: "warning",
@@ -33,20 +28,20 @@ export default function MyCities() {
       confirmButtonText: "Delete city",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(cityActions.deleteCity(id)).then(window.location.reload(true));
+        dispatch(cityActions.deleteCity(cityId));
       }
     });
   };
 
   const handleClickEdit = (id) => {
-    window.location.href = `/cities/edit/${id}`;
+    navigate(`/cities/edit/${id}`);
   };
 
   return (
     <div className="base-cities">
       <div className="card-container" id="container-card">
-        {cities.length > 0 ? (
-          cities.map((city) => (
+        {citiesByUserId.length > 0 ? (
+          citiesByUserId.map((city) => (
             <Card
               type="city"
               element={city}

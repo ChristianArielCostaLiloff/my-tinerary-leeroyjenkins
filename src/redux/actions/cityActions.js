@@ -10,6 +10,18 @@ const getCities = createAsyncThunk("getCities", async () => {
   };
 });
 
+const getCitiesByUserId = createAsyncThunk(
+  "getCitiesByUserId",
+  async (userId) => {
+    const citiesByUserId = await axios.get(
+      `${apiUrl}/api/city?userId=${userId}`
+    );
+    return {
+      citiesByUserId: citiesByUserId.data.response,
+    };
+  }
+);
+
 const getCitiesByNameAndContinent = createAsyncThunk(
   "getCitiesByNameAndContinent",
   async (filters) => {
@@ -28,12 +40,15 @@ const getCitiesByNameAndContinent = createAsyncThunk(
 );
 
 const deleteCity = createAsyncThunk("deleteCity", async (cityId) => {
-  const res = await axios.delete(`${apiUrl}/api/city/${cityId}`);
+  let token = JSON.parse(localStorage.getItem("token"));
+  let headers = { headers: { Authorization: `Bearer ${token.token.user}` } };
+  const res = await axios.delete(`${apiUrl}/api/city/${cityId}`, headers);
   return { cityId: res.data.cityId };
 });
 
 const cityActions = {
   getCities,
+  getCitiesByUserId,
   getCitiesByNameAndContinent,
   deleteCity,
 };

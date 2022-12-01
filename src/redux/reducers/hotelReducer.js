@@ -1,7 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
 import hotelActions from "../actions/hotelActions";
 
-const { getHotels, getHotelsByNameAndSorted, deleteHotel } = hotelActions;
+const { getHotels, getHotelsByUserId, getHotelsByNameAndSorted, deleteHotel } =
+  hotelActions;
 
 const initialState = {
   hotels: [],
@@ -9,6 +10,7 @@ const initialState = {
     name: "",
     sort: "",
   },
+  hotelsByUserId: [],
 };
 
 const hotelReducer = createReducer(initialState, (builder) => {
@@ -16,6 +18,13 @@ const hotelReducer = createReducer(initialState, (builder) => {
     return {
       ...state,
       hotels: action.payload.hotels,
+    };
+  });
+
+  builder.addCase(getHotelsByUserId.fulfilled, (state, action) => {
+    return {
+      ...state,
+      hotelsByUserId: action.payload.hotelsByUserId,
     };
   });
 
@@ -30,7 +39,9 @@ const hotelReducer = createReducer(initialState, (builder) => {
   builder.addCase(deleteHotel.fulfilled, (state, action) => {
     return {
       ...state,
-      hotels: state.hotels.filter((hotel) => hotel._id !== action.payload.hotelId),
+      hotelsByUserId: state.hotelsByUserId.filter(
+        (hotel) => hotel._id !== action.payload.hotelId._id
+      ),
     };
   });
 });

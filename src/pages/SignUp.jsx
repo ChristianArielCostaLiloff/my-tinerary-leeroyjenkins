@@ -1,49 +1,61 @@
+import axios from "axios";
 import React, { useRef } from "react";
+import Swal from "sweetalert2";
 import GoogleButton from "../components/GoogleButton";
 import InputFormSign from "../components/InputFormSign";
+import apiUrl from "../url";
 
 export default function SingUp() {
   const name = useRef(null);
-  const username = useRef(null);
+  const lastName = useRef(null);
+  const age = useRef(null);
   const email = useRef(null);
-  const phone = useRef(null);
   const password = useRef(null);
   const passwordConfirmation = useRef(null);
-  const radioMale = useRef(null);
-  const radioFemale = useRef(null);
-  const radioNot = useRef(null);
+  const photo = useRef(null);
 
-  const radioChecked = () => {
-    if (radioMale.current.checked) {
-      return radioMale.current.value;
-    }
-    if (radioFemale.current.checked) {
-      return radioFemale.current.value;
-    }
-    if (radioNot.current.checked) {
-      return radioNot.current.value;
-    }
-  };
-
-  let handleSubmit = () => {
+  let handleSubmit = async (event) => {
+    event.preventDefault();
     let profile = {
       name: name.current.value,
-      username: username.current.value,
+      lastName: lastName.current.value,
+      role: "user",
+      photo: photo.current.value,
+      age: age.current.value,
       email: email.current.value,
-      phone: phone.current.value,
       password: password.current.value,
-      passwordConfirmation: passwordConfirmation.current.value,
-      gender: radioChecked(),
     };
-    console.log(profile);
-    if (profile.password != profile.passwordConfirmation) {
-      alert("Password confirmation not match");
+    if (profile.password !== passwordConfirmation.current.value) {
+      Swal.fire("Warning!", "Your password doesn't match", "error");
     } else {
-      localStorage.setItem("profile", JSON.stringify(profile));
-      alert("You Sing Up successfully");
+      await axios
+        .post(`${apiUrl}/api/auth/signup`, profile)
+        .then((res) => {
+          if (res.data.success) {
+            Swal.fire("All correct!", "User has been created", "success").then(
+              (result) => {
+                if (result.isConfirmed) {
+                  event.target.reset();
+                }
+              }
+            );
+          } else {
+            Swal.fire(
+              "Correct the following fields",
+              res.data.message.join("<br>"),
+              "error"
+            );
+          }
+        })
+        .catch((error) => {
+          Swal.fire(
+            "Something went wrong!",
+            error.response.data.message,
+            "error"
+          );
+        });
     }
   };
-
 
   return (
     <div className="page--sing-up">
@@ -57,14 +69,21 @@ export default function SingUp() {
                 reference={name}
                 type="text"
               >
-                Full Name
+                Name
               </InputFormSign>
               <InputFormSign
-                text="Enter your username"
-                reference={username}
+                text="Enter your Last Name"
+                reference={lastName}
                 type="text"
               >
-                Username
+                Last Name
+              </InputFormSign>
+              <InputFormSign
+                text="Enter your age"
+                reference={age}
+                type="number"
+              >
+                Age
               </InputFormSign>
               <InputFormSign
                 text="Enter your email"
@@ -72,13 +91,6 @@ export default function SingUp() {
                 type="text"
               >
                 Email
-              </InputFormSign>
-              <InputFormSign
-                text="Enter your number"
-                reference={phone}
-                type="text"
-              >
-                Phone Number
               </InputFormSign>
               <InputFormSign
                 text="Enter your password"
@@ -94,35 +106,16 @@ export default function SingUp() {
               >
                 Confirm Password
               </InputFormSign>
-            </div>
-            <div className="gender-details">
-              <input type="radio" name="gender" id="dot-1" value="Male" ref={radioMale}/>
-              <input type="radio" name="gender" id="dot-2" value="Female" ref={radioFemale}/>
-              <input
-                type="radio"
-                name="gender"
-                id="dot-3"
-                value="Undeclared"
-                ref={radioNot}
-              />
-              <span className="gender-title">Gender</span>
-              <div className="category">
-                <label htmlFor="dot-1">
-                  <span className="dot one"></span>
-                  <span className="gender">Male</span>
-                </label>
-                <label htmlFor="dot-2">
-                  <span className="dot two"></span>
-                  <span className="gender">Female</span>
-                </label>
-                <label htmlFor="dot-3">
-                  <span className="dot three"></span>
-                  <span className="gender">Prefer not to say</span>
-                </label>
-              </div>
+              <InputFormSign text="Photo url" reference={photo} type="text">
+                Photo
+              </InputFormSign>
             </div>
             <div className="button">
-              <input type="submit" id="btn-submit" value="Register" />
+              <input
+                type="submit"
+                id="btn-submit"
+                value="Register"
+              />
             </div>
             <GoogleButton>Sign in with Google</GoogleButton>
           </form>

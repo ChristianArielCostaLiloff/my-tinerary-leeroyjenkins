@@ -1,41 +1,45 @@
 import axios from "axios";
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputFormSign from "../components/InputFormSign";
 import apiUrl from "../url";
 
 export default function HotelEdit() {
+  const navigate = useNavigate();
   const name = useRef(null);
   const photo = useRef(null);
   const capacity = useRef(null);
+  const city = useRef(null);
   const { id } = useParams();
   let [hotelDb, setHotelDb] = useState([]);
+  let [cities, setCities] = useState([]);
 
-  useEffect( () => {
-     axios
+  useEffect(() => {
+    axios
       .get(`${apiUrl}/api/hotel/${id}`)
       .then((res) => setHotelDb(res.data.response))
       .catch((error) => console.log(error));
-  });
+    axios.get(`${apiUrl}/api/city`).then((res) => setCities(res.data.response));
+    // eslint-disable-next-line
+  }, []);
 
   const handleClick = async () => {
     let hotel = {
       name: name.current.value,
       photo: photo.current.value,
       capacity: capacity.current.value,
-      cityId: "63701f25d10c25267b79e291",
-      userId: "6370096b26cecde13c02e04c",
+      cityId: city.current.value,
     };
-    const res = await axios.patch(`${apiUrl}/api/hotel/${id}`, hotel);
+    let token = JSON.parse(localStorage.getItem("token"));
+    let headers = { headers: { Authorization: `Bearer ${token.token.user}` } };
+    const res = await axios.patch(`${apiUrl}/api/hotel/${id}`, hotel, headers);
     if (res.data.success) {
       Swal.fire("Success!", "Your hotel has been updated", "success").then(
         (result) => {
           if (result.isConfirmed) {
-            window.location.href = `/details/hotel/${res.data.data._id}`;
+            navigate(`/details/hotel/${res.data.data._id}`);
           }
         }
       );
@@ -47,7 +51,6 @@ export default function HotelEdit() {
       );
     }
   };
-
   return (
     <div className="body new-city">
       <div className="container">
@@ -80,13 +83,20 @@ export default function HotelEdit() {
                   defaultValue={hotelDb.capacity}
                 />
               </div>
+              <div className="input-box">
+                <span className="details">City</span>
+                <select ref={city} className="select-new">
+                  <option defaultValue> Select city </option>
+                  {cities.map((city) => (
+                    <option value={city._id} key={city._id}>
+                      {city.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
             <div className="button">
-              <input
-                type="button"
-                onClick={handleClick}
-                value="Update hotel"
-              />
+              <input type="button" onClick={handleClick} value="Update hotel" />
             </div>
           </form>
         </div>

@@ -22,7 +22,8 @@ export default function CityEdit() {
       .get(`${apiUrl}/api/city/${id}`)
       .then((res) => setCityDb(res.data.response))
       .catch((error) => console.log(error));
-  });
+    // eslint-disable-next-line
+  }, []);
 
   const handleClick = async () => {
     let city = {
@@ -30,9 +31,10 @@ export default function CityEdit() {
       continent: continent.current.value,
       photo: photo.current.value,
       population: population.current.value,
-      userId: "6370096b26cecde13c02e04c",
     };
-    const res = await axios.put(`${apiUrl}/api/city/${id}`, city);
+    let token = JSON.parse(localStorage.getItem("token"));
+    let headers = { headers: { Authorization: `Bearer ${token.token.user}` } };
+    const res = await axios.put(`${apiUrl}/api/city/${id}`, city, headers);
     if (res.data.success) {
       Swal.fire("Success!", "Your city has been updated", "success").then(
         (result) => {

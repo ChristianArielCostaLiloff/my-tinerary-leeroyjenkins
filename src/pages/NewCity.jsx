@@ -19,7 +19,6 @@ export default function NewCity() {
       continent: continent.current.value,
       photo: photo.current.value,
       population: population.current.value,
-      userId: "6370096b26cecde13c02e04c",
     };
     try {
       Swal.fire({
@@ -31,7 +30,11 @@ export default function NewCity() {
         confirmButtonText: "Create city",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          let res = await axios.post(`${apiUrl}/api/city`, newCity);
+          let token = JSON.parse(localStorage.getItem("token"));
+          let headers = {
+            headers: { Authorization: `Bearer ${token.token.user}` },
+          };
+          const res = await axios.post(`${apiUrl}/api/city`, newCity, headers);
           if (res.data.success) {
             Swal.fire("Builded!", "Your city has been raised", "success").then(
               (result) => {
