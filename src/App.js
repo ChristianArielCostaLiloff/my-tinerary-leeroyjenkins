@@ -19,7 +19,7 @@ import ShowEdit from "./pages/ShowEdit";
 import HotelEdit from "./pages/HotelEdit";
 import MyShows from "./pages/MyShows";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import userActions from "./redux/actions/userActions";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
@@ -33,6 +33,7 @@ function App() {
     if (token) {
       dispatch(userActions.reLogin(token.token.user));
     }
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -47,13 +48,20 @@ function App() {
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/details/:type/:id" element={<DetailsCard />} />
           <Route element={<ProtectedRoute isAllowed={logged} reDirect={"/"} />}>
-            <Route path="/shows/:userId" element={<MyShows />} />
-            <Route path="/shows/edit/:id" element={<ShowEdit />} />
+            <Route path="/show/:userId" element={<MyShows />} />
+            <Route path="/show/edit/:id" element={<ShowEdit />} />
             <Route path="/itinerary/:userId" element={<MyTineraries />} />
             <Route path="/itinerary/edit/:id" element={<ItineraryEdit />} />
-            <Route path="/profile" element={<Profile/>}/>
+            <Route path="/profile" element={<Profile />} />
           </Route>
-          <Route element={<ProtectedRoute isAllowed={logged && role === "admin"} reDirect={"/"} />}>
+          <Route
+            element={
+              <ProtectedRoute
+                isAllowed={logged && role === "admin"}
+                reDirect={"/"}
+              />
+            }
+          >
             <Route path="/newcity" element={<NewCity />} />
             <Route path="/newhotel" element={<NewHotel />} />
             <Route path="/cities/:userId" element={<MyCities />} />

@@ -1,64 +1,32 @@
-import axios from "axios";
 import React from "react";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import Swal from "sweetalert2";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Event from "../components/Event";
 import NoElementsFound from "../components/NoElementsFound";
 import showActions from "../redux/actions/showActions";
-import apiUrl from "../url";
 import NewShow from "./NewShow";
 
 export default function MyShows() {
   const { userId } = useParams();
-  let [show, setShow] = useState([]);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  let { shows } = useSelector((store) => store.showReducer);
 
   useEffect(() => {
-    axios
-      .get(`${apiUrl}/api/show?userId=${userId}`)
-      .then((res) => {
-        setShow(res.data.response);
-      })
-      .catch((error) => console.log(error));
+    dispatch(showActions.getShow(userId));
+    // eslint-disable-next-line
   }, []);
-
-  const handleClickDelete = (id) => {
-    Swal.fire({
-      title: "Do you want delete this show?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#FF4C4C",
-      cancelButtonColor: "#A4a4a4",
-      confirmButtonText: "Delete show",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(showActions.deleteShow(id)).then(navigate(0));
-      }
-    });
-  };
-
-  const handleClickEdit = (id) => {
-    navigate(`/shows/edit/${id}`);
-  };
 
   return (
     <div className="base-cities">
-      <NewShow/>
+      <NewShow key={"formShow"} />
       <div className="card-container" id="container-card">
-        {show.length > 0 ? (
-          show.map((e) => (
-            <Event
-              key={e.id}
-              event={e}
-              editMode={true}
-              handlers={{ handleClickDelete, handleClickEdit }}
-            />
+        {shows.length > 0 ? (
+          shows.map((e) => (
+            <Event key={e.id} event={e} editMode={true} eventType={"show"} />
           ))
         ) : (
-          <NoElementsFound />
+          <NoElementsFound key={"NoElements"} />
         )}
       </div>
     </div>

@@ -60,8 +60,6 @@ const userReducer = createReducer(initialState, (builder) => {
       }
     })
     .addCase(logOut.fulfilled, (state, action) => {
-      console.log("weon");
-      console.log(action);
       if (action.payload.success) {
         localStorage.removeItem("token");
         return {

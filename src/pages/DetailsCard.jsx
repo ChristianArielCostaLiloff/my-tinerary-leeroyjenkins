@@ -14,7 +14,7 @@ export default function DetailsCard() {
   let [event, setEvent] = useState([]);
 
   useEffect(() => {
-    if (type === 'hotel') {
+    if (type === "hotel") {
       axios
         .get(`${apiUrl}/api/hotel/${id}`)
         .then((res) => setPlace(res.data.response))
@@ -24,7 +24,7 @@ export default function DetailsCard() {
         .then((res) => setEvent(res.data.response))
         .catch((error) => console.log(error));
     }
-    if (type === 'city') {
+    if (type === "city") {
       axios
         .get(`${apiUrl}/api/city/${id}`)
         .then((res) => setPlace(res.data.response))
@@ -34,6 +34,7 @@ export default function DetailsCard() {
         .then((res) => setEvent(res.data.response))
         .catch((error) => console.log(error));
     }
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -1,9 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputFormSign from "../components/InputFormSign";
@@ -14,29 +11,30 @@ export default function HotelEdit() {
   const name = useRef(null);
   const photo = useRef(null);
   const capacity = useRef(null);
+  const city = useRef(null);
   const { id } = useParams();
   let [hotelDb, setHotelDb] = useState([]);
-  const { token } = useSelector((store) => store.userReducer);
+  let [cities, setCities] = useState([]);
 
   useEffect(() => {
     axios
       .get(`${apiUrl}/api/hotel/${id}`)
       .then((res) => setHotelDb(res.data.response))
       .catch((error) => console.log(error));
-  });
+    axios.get(`${apiUrl}/api/city`).then((res) => setCities(res.data.response));
+    // eslint-disable-next-line
+  }, []);
 
   const handleClick = async () => {
     let hotel = {
       name: name.current.value,
       photo: photo.current.value,
       capacity: capacity.current.value,
-      cityId: "63701f25d10c25267b79e291",
-      userId: "6370096b26cecde13c02e04c",
+      cityId: city.current.value,
     };
-
-    let headers = { headers: { Authorization: `Bearer ${token}`}}
+    let token = JSON.parse(localStorage.getItem("token"));
+    let headers = { headers: { Authorization: `Bearer ${token.token.user}` } };
     const res = await axios.patch(`${apiUrl}/api/hotel/${id}`, hotel, headers);
-
     if (res.data.success) {
       Swal.fire("Success!", "Your hotel has been updated", "success").then(
         (result) => {
@@ -53,7 +51,6 @@ export default function HotelEdit() {
       );
     }
   };
-
   return (
     <div className="body new-city">
       <div className="container">
@@ -85,6 +82,17 @@ export default function HotelEdit() {
                   min="0"
                   defaultValue={hotelDb.capacity}
                 />
+              </div>
+              <div className="input-box">
+                <span className="details">City</span>
+                <select ref={city} className="select-new">
+                  <option defaultValue> Select city </option>
+                  {cities.map((city) => (
+                    <option value={city._id} key={city._id}>
+                      {city.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <div className="button">

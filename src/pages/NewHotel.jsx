@@ -5,20 +5,27 @@ import axios from "axios";
 import { useRef } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function NewHotel() {
   const navigate = useNavigate();
   const name = useRef(null);
   const photo = useRef(null);
   const capacity = useRef(null);
+  const city = useRef(null);
+  let [cities, setCities] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${apiUrl}/api/city`).then((res) => setCities(res.data.response));
+  }, []);
 
   let handleSubmit = () => {
     let newHotel = {
       name: name.current.value,
       photo: photo.current.value,
       capacity: capacity.current.value,
-      cityId: "63701f25d10c25267b79e294",
-      userId: "6370096b26cecde13c02e04c",
+      cityId: city.current.value,
     };
     try {
       Swal.fire({
@@ -30,8 +37,11 @@ export default function NewHotel() {
         confirmButtonText: "Create hotel",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          let res = await axios.post(`${apiUrl}/api/hotel`, newHotel);
-          console.log(res);
+          let token = JSON.parse(localStorage.getItem("token"));
+          let headers = {
+            headers: { Authorization: `Bearer ${token.token.user}` },
+          };
+          const res = await axios.post(`${apiUrl}/api/hotel`, newHotel, headers);
           if (res.data.success) {
             Swal.fire(
               "Builded!",
@@ -87,6 +97,18 @@ export default function NewHotel() {
                   min="0"
                 />
               </div>
+              <div className="input-box">
+                  <span className="details">City</span>
+                  <select ref={city} className="select-new">
+                    <option defaultValue> Select city </option>
+                    {cities.map((city) => (
+                      <option value={city._id} key={city._id}>
+                        {" "}
+                        {city.name}{" "}
+                      </option>
+                    ))}
+                  </select>
+                </div>
             </div>
             <div className="button">
               <input

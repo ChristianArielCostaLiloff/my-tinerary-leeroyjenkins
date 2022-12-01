@@ -9,6 +9,18 @@ const getHotels = createAsyncThunk("getHotels", async () => {
   };
 });
 
+const getHotelsByUserId = createAsyncThunk(
+  "getHotelsByUserId",
+  async (userId) => {
+    const hotelsByUserId = await axios.get(
+      `${apiUrl}/api/hotel?userId=${userId}`
+    );
+    return {
+      hotelsByUserId: hotelsByUserId.data.response,
+    };
+  }
+);
+
 const getHotelsByNameAndSorted = createAsyncThunk(
   "getHotelsByNameAndSorted",
   async (filters) => {
@@ -23,14 +35,17 @@ const getHotelsByNameAndSorted = createAsyncThunk(
 );
 
 const deleteHotel = createAsyncThunk("deleteHotel", async (hotelId) => {
-  const res = await axios.delete(`${apiUrl}/api/hotel/${hotelId}`);
+  let token = JSON.parse(localStorage.getItem("token"));
+  let headers = { headers: { Authorization: `Bearer ${token.token.user}` } };
+  const res = await axios.delete(`${apiUrl}/api/hotel/${hotelId}`, headers);
   return { hotelId: res.data.hotelId };
 });
 
 const hotelActions = {
   getHotels,
+  getHotelsByUserId,
   getHotelsByNameAndSorted,
-  deleteHotel
+  deleteHotel,
 };
 
 export default hotelActions;

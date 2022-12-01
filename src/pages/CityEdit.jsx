@@ -3,7 +3,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputFormSign from "../components/InputFormSign";
@@ -17,14 +16,14 @@ export default function CityEdit() {
   const population = useRef(null);
   const { id } = useParams();
   let [cityDb, setCityDb] = useState([]);
-  let { _id , token} = useSelector(store=>store.userReducer)
 
   useEffect(() => {
     axios
       .get(`${apiUrl}/api/city/${id}`)
       .then((res) => setCityDb(res.data.response))
       .catch((error) => console.log(error));
-  });
+    // eslint-disable-next-line
+  }, []);
 
   const handleClick = async () => {
     let city = {
@@ -32,9 +31,9 @@ export default function CityEdit() {
       continent: continent.current.value,
       photo: photo.current.value,
       population: population.current.value,
-      userId: _id,
     };
-    let headers = { headers: { Authorization: `Bearer ${token}`}}
+    let token = JSON.parse(localStorage.getItem("token"));
+    let headers = { headers: { Authorization: `Bearer ${token.token.user}` } };
     const res = await axios.put(`${apiUrl}/api/city/${id}`, city, headers);
     if (res.data.success) {
       Swal.fire("Success!", "Your city has been updated", "success").then(

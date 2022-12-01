@@ -48,7 +48,6 @@ const logOut = createAsyncThunk("logOut", async (token) => {
   let headers = { headers: { Authorization: `Bearer ${token}` } };
   try {
     let user = await axios.post(`${apiUrl}/api/auth/signout`, null, headers);
-    console.log(user);
     return {
       success: true,
       response: {
