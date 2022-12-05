@@ -1522,3 +1522,29 @@ form .button input:hover {
   align-items: center;
   justify-content: space-evenly;
 }
+/* ---Reactions--- */
+
+.reactions-container{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+}
+
+.btn-reaction{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  margin: 2px;
+  border-radius: 5px;
+}
+
+#figure-reaction{
+  width: 20px;
+  min-height: 20px;
+  margin: 2px;
+}

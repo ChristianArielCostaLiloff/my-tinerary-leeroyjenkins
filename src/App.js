@@ -23,6 +23,7 @@ import { useEffect } from "react";
 import userActions from "./redux/actions/userActions";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
+import NewReaction from "./pages/NewReaction";
 
 function App() {
   const dispatch = useDispatch();
@@ -68,6 +69,7 @@ function App() {
             <Route path="/cities/edit/:id" element={<CityEdit />} />
             <Route path="/hotels/:userId" element={<MyHotels />} />
             <Route path="/hotels/edit/:id" element={<HotelEdit />} />
+            <Route path="/newreaction" element={<NewReaction />} />
           </Route>
         </Routes>
       </Layout>

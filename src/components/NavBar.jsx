@@ -96,6 +96,14 @@ export default function NavBar() {
                         New Hotel
                       </CallToAction>
                     </li>
+                    <li>
+                      <CallToAction
+                        path="/newreaction"
+                        style="menu--vertical-element"
+                      >
+                        New Reaction
+                      </CallToAction>
+                    </li>
                   </ul>
                 </li>
               )}
