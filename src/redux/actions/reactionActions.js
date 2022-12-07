@@ -1,17 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import apiUrl from "../../url";
 import axios from "axios";
-import { Action } from "@remix-run/router";
 
-const getReactions = createAsyncThunk("getReactions", async (itineraryId) => {
-  const reactionsGet = await axios.get(
-    `${apiUrl}/api/reaction?itineraryId=${itineraryId}`
-  );
-  return {
-    itineraryId: itineraryId,
-    reactions: reactionsGet.data.response,
-  };
-});
+const getReactions = createAsyncThunk(
+  "getReactions",
+  async ({ eventId, eventType }) => {
+    const reactionsGet = await axios.get(
+      `${apiUrl}/api/reaction?${eventType}Id=${eventId}`
+    );
+    return {
+      reactions: reactionsGet.data.response,
+    };
+  }
+);
 
 const clearReactions = createAsyncThunk("clearReactions", async () => {
   return { reactions: [] };
@@ -28,10 +29,43 @@ const addReaction = createAsyncThunk(
       headers
     );
     console.log(reactionPut);
-    return { reaction: reactionPut.data.reaction, itineraryId };
+    return {
+      reaction: reactionPut.data.reaction,
+    };
   }
 );
 
-const reactionActions = { getReactions, clearReactions, addReaction };
+const addReactionByUserId = createAsyncThunk(
+  "addReactionByUserId",
+  async (userId) => {
+    const reactionsGet = await axios.get(
+      `${apiUrl}/api/reaction?userId=${userId}`
+    );
+    return { reactionsByUser: reactionsGet.data.response };
+  }
+);
+
+const deleteReaction = createAsyncThunk(
+  "deleteReaction",
+  async (reactionId) => {
+    let token = JSON.parse(localStorage.getItem("token"));
+    let headers = { headers: { Authorization: `Bearer ${token.token.user}` } };
+    const reactionDeleted = await axios.put(
+      `${apiUrl}/api/reaction/${reactionId}`,
+      null,
+      headers
+    );
+    console.log(reactionDeleted);
+    return { reactionDeleted: reactionDeleted.data.response };
+  }
+);
+
+const reactionActions = {
+  getReactions,
+  clearReactions,
+  addReaction,
+  addReactionByUserId,
+  deleteReaction,
+};
 
 export default reactionActions;

@@ -13,14 +13,19 @@ export default function Event(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let itineraryReactions = useSelector((store) =>
-    store.reactionReducer.reactions.find(
-      (reaction) => reaction.itineraryId === event._id
+    store.reactionReducer.reactions.filter((reaction) =>
+      reaction.itineraryId
+        ? reaction.itineraryId === event._id
+        : reaction.showId === event._id
     )
   );
-
   useEffect(() => {
+    let data = {
+      eventId: event._id,
+      eventType,
+    };
     dispatch(reactionActions.clearReactions());
-    dispatch(reactionActions.getReactions(event._id));
+    dispatch(reactionActions.getReactions(data));
   }, []);
 
   const handleClickDelete = (id) => {
@@ -51,15 +56,15 @@ export default function Event(props) {
   if (Array.isArray(event.photo)) {
     photo = photo[0];
   }
-
+  
   return (
     <div>
       <div className="container_card_IS">
         <div className="card_IS">
           <div className="reactions-container">
             {itineraryReactions &&
-              itineraryReactions.reactions.map((reaction) => (
-                <Reaction reaction={reaction} />
+              itineraryReactions.map((reaction) => (
+                <Reaction reaction={reaction} eventType={eventType} />
               ))}
           </div>
           {editMode && (

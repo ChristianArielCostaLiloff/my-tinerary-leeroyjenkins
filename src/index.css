@@ -411,6 +411,14 @@ nav {
   font-weight: 500;
   transition: 0.5s;
 }
+.action .menu ul li div {
+  display: inline-block;
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  transition: 0.5s;
+  cursor: pointer;
+}
 
 .action .menu ul li:hover a {
   color: #1b3a4b;
@@ -1547,4 +1555,73 @@ form .button input:hover {
   width: 20px;
   min-height: 20px;
   margin: 2px;
+}
+
+/* ---MyReactions--- */
+.myreactions-container{
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ---ReactionCard--- */
+.container_fav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 700px;
+  height: 80px;
+  background-color: #ccc;
+  border-radius: 10px;
+  padding-right: 10px;
+  overflow: hidden;
+}
+
+.img_fav {
+  height: 80px;
+    width: 150px;
+    object-fit: cover;
+}
+
+.data_fav {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding: 0px 15px;
+}
+
+.name_fav {
+  font-size: 25px;
+}
+.fav_icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.img_reaction_fav {
+  width: 30px;
+}
+
+.trash_reaction_fav {
+  background-image: url("/public/img/trashbin_icon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #ff00003b;
+  width: 40px;
+  height: 60px;
+  cursor: pointer;
+  border-radius: 10px;
+  
+}
+.trash_reaction_fav:hover{
+  background-color: #ff00009f;
 }

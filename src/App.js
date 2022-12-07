@@ -24,6 +24,7 @@ import userActions from "./redux/actions/userActions";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
 import NewReaction from "./pages/NewReaction";
+import MyReactions from "./pages/MyReactions";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ function App() {
             <Route path="/itinerary/:userId" element={<MyTineraries />} />
             <Route path="/itinerary/edit/:id" element={<ItineraryEdit />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/myreactions" element={<MyReactions />} />
           </Route>
           <Route
             element={

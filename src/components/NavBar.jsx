@@ -230,6 +230,10 @@ export default function NavBar() {
             </h3>
             <ul>
               <li>
+                {/* <img src="/img/edit.png" alt="edit" /> */}
+                <CallToAction path="/myreactions">My Reactions</CallToAction>
+              </li>
+              <li>
                 <img src="/img/edit.png" alt="edit" />
                 <CallToAction path="/profile">Edit profile</CallToAction>
               </li>
