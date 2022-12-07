@@ -1,14 +1,32 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import itineraryActions from "../redux/actions/itineraryActions";
+import reactionActions from "../redux/actions/reactionActions";
 import showActions from "../redux/actions/showActions";
+import Reaction from "./Reaction";
 
 export default function Event(props) {
   let { event, editMode, eventType } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  let itineraryReactions = useSelector((store) =>
+    store.reactionReducer.reactions.filter((reaction) =>
+      reaction.itineraryId
+        ? reaction.itineraryId === event._id
+        : reaction.showId === event._id
+    )
+  );
+  useEffect(() => {
+    let data = {
+      eventId: event._id,
+      eventType,
+    };
+    dispatch(reactionActions.clearReactions());
+    dispatch(reactionActions.getReactions(data));
+  }, []);
 
   const handleClickDelete = (id) => {
     Swal.fire({
@@ -38,10 +56,17 @@ export default function Event(props) {
   if (Array.isArray(event.photo)) {
     photo = photo[0];
   }
+  
   return (
     <div>
       <div className="container_card_IS">
         <div className="card_IS">
+          <div className="reactions-container">
+            {itineraryReactions &&
+              itineraryReactions.map((reaction) => (
+                <Reaction reaction={reaction} eventType={eventType} />
+              ))}
+          </div>
           {editMode && (
             <div className="container_img_admin">
               <button

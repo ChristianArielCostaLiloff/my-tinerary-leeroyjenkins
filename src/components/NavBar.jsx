@@ -96,6 +96,14 @@ export default function NavBar() {
                         New Hotel
                       </CallToAction>
                     </li>
+                    <li>
+                      <CallToAction
+                        path="/newreaction"
+                        style="menu--vertical-element"
+                      >
+                        New Reaction
+                      </CallToAction>
+                    </li>
                   </ul>
                 </li>
               )}
@@ -221,6 +229,10 @@ export default function NavBar() {
               <span>{role}</span>
             </h3>
             <ul>
+              <li>
+                {/* <img src="/img/edit.png" alt="edit" /> */}
+                <CallToAction path="/myreactions">My Reactions</CallToAction>
+              </li>
               <li>
                 <img src="/img/edit.png" alt="edit" />
                 <CallToAction path="/profile">Edit profile</CallToAction>
