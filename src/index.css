@@ -411,6 +411,14 @@ nav {
   font-weight: 500;
   transition: 0.5s;
 }
+.action .menu ul li div {
+  display: inline-block;
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  transition: 0.5s;
+  cursor: pointer;
+}
 
 .action .menu ul li:hover a {
   color: #1b3a4b;
@@ -1226,9 +1234,11 @@ form .button input:hover {
 }
 .background-delete {
   background-image: url("/public/img/trashbin_icon.svg");
+  background-repeat: no-repeat;
 }
 .background-edit {
   background-image: url("/public/img/edit_icon.svg");
+  background-repeat: no-repeat;
   object-fit: scale-down;
 }
 /* --- Details --- */
@@ -1252,10 +1262,10 @@ form .button input:hover {
 }
 /* --- Event --- */
 .container_card_IS {
-  width: 100%;
-  max-width: 600px;
+  width: 600px;
   display: flex;
-  height: 600px;
+  min-height: 600px;
+  height: fit-content;
 }
 
 .card_IS {
@@ -1521,4 +1531,201 @@ form .button input:hover {
   width: 100%;
   align-items: center;
   justify-content: space-evenly;
+}
+/* ---Reactions--- */
+
+.reactions-container{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+}
+
+.btn-reaction{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  margin: 2px;
+  border-radius: 5px;
+}
+
+#figure-reaction{
+  width: 20px;
+  min-height: 20px;
+  margin: 2px;
+}
+
+/* ---MyReactions--- */
+.myreactions-container{
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ---ReactionCard--- */
+.container_fav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 700px;
+  height: 80px;
+  background-color: #ccc;
+  border-radius: 10px;
+  padding-right: 10px;
+  overflow: hidden;
+}
+
+.img_fav {
+  height: 80px;
+    width: 150px;
+    object-fit: cover;
+}
+
+.data_fav {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding: 0px 15px;
+}
+
+.name_fav {
+  font-size: 25px;
+}
+.fav_icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.img_reaction_fav {
+  width: 30px;
+}
+
+.trash_reaction_fav {
+  background-image: url("/public/img/trashbin_icon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #ff00003b;
+  width: 40px;
+  height: 60px;
+  cursor: pointer;
+  border-radius: 10px;
+  
+}
+.trash_reaction_fav:hover{
+  background-color: #ff00009f;
+}
+
+.comment_container {
+  width: 100%;
+  min-height: 300px;
+  height: fit-content;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  justify-content: flex-start;
+}
+
+.comment-box{
+  height: 90px;
+  width: 100%;
+  background-color: #71b7e6;
+  border-radius: 15px;
+  display: flex;
+  overflow: hidden;
+}
+
+.comment-box img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  min-height: 90px;
+}
+
+.comment-box div {
+  height: 100%;
+  padding: 5px 5px 5px 5px;
+}
+
+.container-btn-comment{
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.btn-comment{
+  width: 30px;
+  height: 30px;
+  display: flex;
+  cursor: pointer;
+  margin: 2px;
+  border-radius: 5px;
+}
+
+.comment-name{
+  font-size: 18px;
+  font-weight: 600;
+  padding-left: 5px;
+}
+
+.comment-content{
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  height: 60px;
+}
+
+.comment-data {
+  height: 100%;
+  flex-grow: 1;
+}
+
+.btn-add-comment {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  width: 30px;
+  height: 30px;
+  font-size: 25px;
+}
+
+.container-new-comment {
+  background-color: #8b8b8b;
+  height: 50px;
+  width: 80%;
+  position: absolute;
+  bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  gap: 5px;
+}
+
+.text-new-comment {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  padding-left: 5px;
+}
+
+.send-new-comment {
+  height: 30px;
+  border-radius: 10px;
+  width: 50px;
 }

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import apiUrl from "../url";
 
@@ -23,6 +22,7 @@ export default function Profile() {
       .get(`${apiUrl}/api/auth/me/${_id}`)
       .then((res) => setUser(res.data.response))
       .catch((error) => console.log(error));
+      // eslint-disable-next-line
   }, []);
 
   const handleClick = async () => {
@@ -35,7 +35,6 @@ export default function Profile() {
       password: password.current.value,
     };
     const res = await axios.patch(`${apiUrl}/api/auth/me/${_id}`, profile);
-    console.log(res);
     if (res.data.success) {
       Swal.fire("Success!", "Your profile has been updated", "success");
     }
