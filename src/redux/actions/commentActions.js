@@ -20,7 +20,6 @@ const deleteComment = createAsyncThunk("deleteComment", async (commentId) => {
   let token = JSON.parse(localStorage.getItem("token"));
   let headers = { headers: { Authorization: `Bearer ${token.token.user}` } };
   const res = await axios.delete(`${apiUrl}/api/comment/${commentId}`, headers);
-  console.log(res);
   return {
     commentDeleted: res.data.res,
   };
