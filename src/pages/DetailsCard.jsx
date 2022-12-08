@@ -12,6 +12,13 @@ export default function DetailsCard() {
   let { id, type } = useParams();
   let [place, setPlace] = useState([]);
   let [event, setEvent] = useState([]);
+  let eventType;
+  if (type === "hotel") {
+    eventType = "show"
+  }
+  if (type === "city") {
+    eventType = "itinerary"
+  }
 
   useEffect(() => {
     if (type === "hotel") {
@@ -36,7 +43,6 @@ export default function DetailsCard() {
     }
     // eslint-disable-next-line
   }, []);
-
   return (
     <div className="base-cities details-page">
       <div className="detail-element">
@@ -48,7 +54,7 @@ export default function DetailsCard() {
       </div>
       <div className="detail-shows">
         {event.length > 0 ? (
-          event.map((e) => <Event key={e.id} event={e} />)
+          event.map((e) => <Event key={e.id} event={e} eventType={eventType} />)
         ) : (
           <NoElementsFound />
         )}

@@ -28,7 +28,6 @@ const addReaction = createAsyncThunk(
       null,
       headers
     );
-    console.log(reactionPut);
     return {
       reaction: reactionPut.data.reaction,
     };
@@ -55,7 +54,6 @@ const deleteReaction = createAsyncThunk(
       null,
       headers
     );
-    console.log(reactionDeleted);
     return { reactionDeleted: reactionDeleted.data.response };
   }
 );
